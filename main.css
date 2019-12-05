@@ -1,0 +1,122 @@
+div.cafes {
+    width: 70%;
+    float: left;
+}
+
+div.caddy {
+    width: 28%;
+    background-color: #252525;
+    margin-left: 70%;
+}
+
+div.cafes div.card {
+    width: 50%;
+    height: 49vh;
+    background-image: url('assets/dishes/cup&cake/bgCupCake.jpg');
+    background-position: center;
+    background-size: cover;
+    float: left;
+}
+
+div.cafes div.card div.black {
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0);
+    color: white;
+    opacity: 0;
+    font-size: 28pt;
+    text-align: center;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+}
+
+div.cafes div.card div.black:hover {
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.75);
+    opacity: 1;
+    color: white;
+    font-size: 28pt;
+    text-align: center;
+    border: 2pt inset orange;
+}
+
+div.cafes div.card div.black img {
+    width: 20%;
+    margin-top: 20%;
+}
+
+div.caddy {
+    color: white;
+    padding: 15px;
+    height: 95vh;
+}
+
+div.caddy h1 {
+    color: white;
+    font-size: 36pt;
+}
+
+div.caddy img#caddyBag {
+    width: 15%;
+    float: right;
+    margin-right: 10px;
+}
+
+div.caddyBody{
+    height: 60%;
+}
+
+div.caddyBody div.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+div.caddyBody div.container h3#itemCounter{
+    margin-right: 3px;
+    font-size: 18pt;
+}
+
+div.caddyBody div.container h3#union{
+    margin-right: 3px;
+    font-size: 18pt;
+}
+
+div.caddyBody div.container img{
+    height: 50px;
+    margin: 0 5px;
+    border-radius: 20px;
+}
+
+div.caddyBody div.container input#selectedItem{
+    width: 40%;
+    height: 48px;
+    border: none;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding-left: 10px;
+    font-size: 14pt;
+}
+
+div.caddyBody div.container input#selectedPrice{
+    width: 15%;
+    height: 48px;
+    border: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding-right: 10px;
+    text-align: right;
+    font-size: 14pt;
+}
+
+div.caddyBody div.container button{
+    height: 50px;
+    width: 10%;
+    border: none;
+    margin: 0 5px;
+    border-radius: 20px;
+}
+
+div.caddyFooter{
+
+}
