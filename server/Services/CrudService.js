@@ -100,6 +100,7 @@ class CrudService extends BaseService {
             var recordDAO = recordDTO.toDAO(this.classDAO());
             recordDAO = await recordDAO.save(recordDAO);
             recordDTO.fromDAO(recordDAO);
+            //TODO: check why it works with putModel and not with PostModel.
             return recordDTO.putModel();
         }
         return null;

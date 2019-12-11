@@ -12,7 +12,7 @@ class KindProductService extends CrudService {
     async canCreateOne(kindProductDTO, errors) {
         console.log(`${this.nameService}.canCreateOne(${kindProductDTO.kind}): enters`);
         if (await super.canCreateOne(kindProductDTO, errors)) {
-            var kindProductsByKindSubKind = await this.findKindProductsByKind(kindProductDTO.kind, kindProductDTO.subKind, errors);
+            var kindProductsByKindSubKind = await this.findKindProductsByKindSubKind(kindProductDTO.kind, kindProductDTO.subKind, errors);
             if (kindProductsByKindSubKind) {
                 if (kindProductsByKindSubKind.length == 0) {
                     return true;
@@ -40,7 +40,7 @@ class KindProductService extends CrudService {
 
     async canUpdateOne(kindProductDTO, errors) {
         if (await super.canUpdateOne(kindProductDTO, errors)) {
-            var kindProductsByKindSubKind = await this.findKindProductsByKind(kindProductDTO.kind, kindProductDTO.subKind, errors);
+            var kindProductsByKindSubKind = await this.findKindProductsByKindSubKind(kindProductDTO.kind, kindProductDTO.subKind, errors);
             if (kindProductsByKindSubKind) {
                 if (kindProductsByKindSubKind.length == 0) {
                     return true;

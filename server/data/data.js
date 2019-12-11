@@ -6,9 +6,9 @@ const data = [{
     "dishes": [{
             "id": 1,
             "name": "Cold Brew",
-            "type": "Coffe",
-            "kind": "VILLA ROSITA – LIME",
-            "notes": "lemon, ginger, lime cake",
+            "type": "Coffe", //en el DAO es Kind
+            "kind": "VILLA ROSITA – LIME", // en el DAO es subKind
+            "notes": "lemon, ginger, lime cake",//en el DAO es description
             "ingredients": "coffee",
             "price": 3.50,
             "img": "../assets/dishes/satans/coldBrew"

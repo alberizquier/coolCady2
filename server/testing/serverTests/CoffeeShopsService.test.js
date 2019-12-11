@@ -48,242 +48,239 @@ test('After clearing contextDB no record is found', async () => {
     }
 });
 
-// test('Can create a new record', async () => {
-// let context = new CoffeeShopContext("localhost", "coolCaddyTest");
-// let connection = await context.connect("localhost", "coolCaddyTest");
-// if (connection) {
-// let coffeeShopDTO = context.coffeeShopsService.postModel();
-// coffeeShopDTO.name = "Cafeteria 1";
-// coffeeShopDTO.displayName = "Cafeteria 1";
-// coffeeShopDTO.address = "Via de la inmaculada 1";
-// coffeeShopDTO.pictureURL = "Cafeteria1.png";
-// coffeeShopDTO.description = "Una cafeteria de churros";
-// var errors = [];
-// let newCoffeeShopDTO = await context.coffeeShopsService.createOne(coffeeShopDTO, errors);
-// expect(newCoffeeShopDTO).not.toBe(null);
-// expect(newCoffeeShopDTO.name).toBe("Cafeteria 1");
-// expect(newCoffeeShopDTO.displayName).toBe("Cafeteria 1");
-// expect(newCoffeeShopDTO.address).toBe("Via de la inmaculada 1");
-// expect(newCoffeeShopDTO.pictureURL).toBe("Cafeteria1.png");
-// expect(newCoffeeShopDTO.description).toBe("Una cafeteria de churros");
-// }
-// });
+test('Can create a new record', async () => {
+    let context = new CoffeeShopContext("localhost", "coolCaddyTest");
+    let connection = await context.connect("localhost", "coolCaddyTest");
+    if (connection) {
+        let coffeeShopDTO = context.coffeeShopsService.postModel();
+        coffeeShopDTO.name = "Cafeteria 1";
+        coffeeShopDTO.displayName = "Cafeteria 1";
+        coffeeShopDTO.address = "Via de la inmaculada 1";
+        coffeeShopDTO.pictureURL = "Cafeteria1.png";
+        coffeeShopDTO.description = "Una cafeteria de churros";
+        var errors = [];
+        let newCoffeeShopDTO = await context.coffeeShopsService.createOne(coffeeShopDTO, errors);
+        expect(newCoffeeShopDTO).not.toBe(null);
+        expect(newCoffeeShopDTO.name).toBe("Cafeteria 1");
+        expect(newCoffeeShopDTO.displayName).toBe("Cafeteria 1");
+        expect(newCoffeeShopDTO.address).toBe("Via de la inmaculada 1");
+        expect(newCoffeeShopDTO.pictureURL).toBe("Cafeteria1.png");
+        expect(newCoffeeShopDTO.description).toBe("Una cafeteria de churros");
+    }
+});
 
-// test('Cannot duplicate a record', async () => {
-// let context = new CoffeeShopContext("localhost", "coolCaddyTest");
-// let connection = await context.connect("localhost", "coolCaddyTest");
-// if (connection) {
-// let coffeeShopDTO = context.coffeeShopsService.model();
-// coffeeShopDTO.name = "Cafeteria 1";
-// coffeeShopDTO.displayName = "Cafeteria 1";
-// coffeeShopDTO.address = "Via de la inmaculada 1";
-// coffeeShopDTO.pictureURL = "Cafeteria1.png";
-// coffeeShopDTO.description = "Una cafeteria de churros";
-// var errors = [];
-// let newCoffeeShopDTO = await context.coffeeShopsService.createOne(coffeeShopDTO, errors);
-// expect(newCoffeeShopDTO).toBe(null);
-// }
-// });
+test('Cannot duplicate a record', async () => {
+    let context = new CoffeeShopContext("localhost", "coolCaddyTest");
+    let connection = await context.connect("localhost", "coolCaddyTest");
+    if (connection) {
+        let coffeeShopDTO = context.coffeeShopsService.model();
+        coffeeShopDTO.name = "Cafeteria 1";
+        coffeeShopDTO.displayName = "Cafeteria 1";
+        coffeeShopDTO.address = "Via de la inmaculada 1";
+        coffeeShopDTO.pictureURL = "Cafeteria1.png";
+        coffeeShopDTO.description = "Una cafeteria de churros";
+        var errors = [];
+        let newCoffeeShopDTO = await context.coffeeShopsService.createOne(coffeeShopDTO, errors);
+        expect(newCoffeeShopDTO).toBe(null);
+    }
+});
 
-// test('can read a record', async () => {
-// let context = new CoffeeShopContext("localhost", "coolCaddyTest");
-// let connection = await context.connect("localhost", "coolCaddyTest");
-// if (connection) {
-// var errors = [];
-// let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("Cafeteria 1", errors);
-// expect(coffeeShopsDTO).not.toBe(null);
-// expect(coffeeShopsDTO.length).toBe(1);
-// expect(coffeeShopsDTO[0].name).toBe("Cafeteria 1");
-// errors = [];
-// let coffeeShopDTO = await context.coffeeShopsService.readOne(coffeeShopsDTO[0].id, errors);
-// expect(coffeeShopDTO).not.toBe(null);
-// expect(coffeeShopDTO.id).toBe(coffeeShopsDTO[0].id);
-// }
-// });
+test('can read a record', async () => {
+    let context = new CoffeeShopContext("localhost", "coolCaddyTest");
+    let connection = await context.connect("localhost", "coolCaddyTest");
+    if (connection) {
+        var errors = [];
+        let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("Cafeteria 1", errors);
+        expect(coffeeShopsDTO).not.toBe(null);
+        expect(coffeeShopsDTO.length).toBe(1);
+        expect(coffeeShopsDTO[0].name).toBe("Cafeteria 1");
+        let coffeeShopDTO = await context.coffeeShopsService.readOne(coffeeShopsDTO[0].id, errors);
+        expect(coffeeShopDTO).not.toBe(null);
+        expect(coffeeShopDTO.id).toBe(coffeeShopsDTO[0].id);
+    }
+});
 
-// test('Can read a fullRecordDTO', async () => {
-// let context = new CoffeeShopContext("localhost", "coolCaddyTest");
-// let connection = await context.connect("localhost", "coolCaddyTest");
-// if (connection) {
-// var errors = [];
-// let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("Cafeteria 1", errors);
-// expect(coffeeShopsDTO).not.toBe(null);
-// expect(coffeeShopsDTO.length).toBe(1);
-// expect(coffeeShopsDTO[0].name).toBe("Cafeteria 1");
-// errors = [];
-// let coffeeShopDTO = await context.coffeeShopsService.readFullOne(coffeeShopsDTO[0].id, errors);
-// expect(coffeeShopDTO).not.toBe(null);
-// expect(coffeeShopDTO.id).toBe(coffeeShopsDTO[0].id);
-// }
-// });
+test('Can read a fullRecordDTO', async () => {
+    let context = new CoffeeShopContext("localhost", "coolCaddyTest");
+    let connection = await context.connect("localhost", "coolCaddyTest");
+    if (connection) {
+        var errors = [];
+        let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("Cafeteria 1", errors);
+        expect(coffeeShopsDTO).not.toBe(null);
+        expect(coffeeShopsDTO.length).toBe(1);
+        expect(coffeeShopsDTO[0].name).toBe("Cafeteria 1");
+        errors = [];
+        let coffeeShopDTO = await context.coffeeShopsService.readFullOne(coffeeShopsDTO[0].id, errors);
+        expect(coffeeShopDTO).not.toBe(null);
+        expect(coffeeShopDTO.id).toBe(coffeeShopsDTO[0].id);
+    }
+});
 
-// test('Cannot read a RecordDTO, id.value = dummy', async () => {
-// let context = new CoffeeShopContext("localhost", "coolCaddyTest");
-// let connection = await context.connect("localhost", "coolCaddyTest");
-// if (connection) {
-// var errors = [];
-// let id = context.mongoose.Types.ObjectId();
-// let coffeeShopDTO = await context.coffeeShopsService.readOne(id, errors);
-// expect(coffeeShopDTO).toBe(null);
-// }
-// });
+test('Cannot read a RecordDTO, id.value = dummy', async () => {
+    let context = new CoffeeShopContext("localhost", "coolCaddyTest");
+    let connection = await context.connect("localhost", "coolCaddyTest");
+    if (connection) {
+        var errors = [];
+        let id = context.mongoose.Types.ObjectId();
+        let coffeeShopDTO = await context.coffeeShopsService.readOne(id, errors);
+        expect(coffeeShopDTO).toBe(null);
+    }
+});
 
-// test('Cannot read a fullRecordDTO, id.value = dummy', async () => {
-// let context = new CoffeeShopContext("localhost", "coolCaddyTest");
-// let connection = await context.connect("localhost", "coolCaddyTest");
-// if (connection) {
-// var errors = [];
-// let id = context.mongoose.Types.ObjectId();
-// let coffeeShopDTO = await context.coffeeShopsService.readFullOne(id, errors);
-// expect(coffeeShopDTO).toBe(null);
-// }
-// });
+test('Cannot read a fullRecordDTO, id.value = dummy', async () => {
+    let context = new CoffeeShopContext("localhost", "coolCaddyTest");
+    let connection = await context.connect("localhost", "coolCaddyTest");
+    if (connection) {
+        var errors = [];
+        let id = context.mongoose.Types.ObjectId();
+        let coffeeShopDTO = await context.coffeeShopsService.readFullOne(id, errors);
+        expect(coffeeShopDTO).toBe(null);
+    }
+});
 
-// test('can update a record', async () => {
-// let context = new CoffeeShopContext("localhost", "coolCaddyTest");
-// let connection = await context.connect("localhost", "coolCaddyTest");
-// if (connection) {
-// var errors = [];
-// let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("Cafeteria 1", errors);
-// expect(coffeeShopsDTO).not.toBe(null);
-// expect(coffeeShopsDTO.length).toBe(1);
-// expect(coffeeShopsDTO[0].name).toBe("Cafeteria 1");
-// errors = [];
-// let coffeeShopDTO = coffeeShopsDTO[0];
-// coffeeShopDTO.name = "Cafeteria 2";
-// errors = [];
-// let updatedVatDTO = await context.coffeeShopsService.updateOne(coffeeShopDTO, coffeeShopDTO.id, errors);
-// expect(updatedVatDTO).not.toBe(null);
-// expect(updatedVatDTO.displayName).toBe("Cafeteria 1");
-// }
-// });
+test('can update a record', async () => {
+    let context = new CoffeeShopContext("localhost", "coolCaddyTest");
+    let connection = await context.connect("localhost", "coolCaddyTest");
+    if (connection) {
+        var errors = [];
+        let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("Cafeteria 1", errors);
+        expect(coffeeShopsDTO).not.toBe(null);
+        expect(coffeeShopsDTO.length).toBe(1);
+        expect(coffeeShopsDTO[0].name).toBe("Cafeteria 1");
+        let coffeeShopDTO = coffeeShopsDTO[0];
+        coffeeShopDTO.name = "Cafeteria 2";
+        let updatedCoffeeShopDTO = await context.coffeeShopsService.updateOne(coffeeShopDTO, coffeeShopDTO.id, errors);
+        expect(updatedCoffeeShopDTO).not.toBe(null);
+        expect(updatedCoffeeShopDTO.displayName).toBe("Cafeteria 1");
+    }
+});
 
-// test('cannot update a record with a dummyId', async () => {
-// let context = new CoffeeShopContext("localhost", "coolCaddyTest");
-// let connection = await context.connect("localhost", "coolCaddyTest");
-// if (connection) {
-// var errors = [];
-// let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("Cafeteria 1", errors);
-// expect(coffeeShopsDTO).not.toBe(null);
-// expect(coffeeShopsDTO.length).toBe(1);
-// expect(coffeeShopsDTO[0].name).toBe("Cafeteria 1");
-// errors = [];
-// let coffeeShopDTO = coffeeShopsDTO[0];
-// let dummyId = context.mongoose.Types.ObjectId();
-// errors = [];
-// let updatedVatDTO = await context.coffeeShopsService.updateOne(coffeeShopDTO, dummyId, errors);
-// expect(updatedVatDTO).toBe(null);
-// }
-// });
+test('cannot update a record with a dummyId', async () => {
+    let context = new CoffeeShopContext("localhost", "coolCaddyTest");
+    let connection = await context.connect("localhost", "coolCaddyTest");
+    if (connection) {
+        var errors = [];
+        let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("Cafeteria 2", errors);
+        expect(coffeeShopsDTO).not.toBe(null);
+        expect(coffeeShopsDTO.length).toBe(1);
+        expect(coffeeShopsDTO[0].name).toBe("Cafeteria 2");
+        let coffeeShopDTO = coffeeShopsDTO[0];
+        let dummyId = context.mongoose.Types.ObjectId();
+        let updatedCoffeeShopDTO = await context.coffeeShopsService.updateOne(coffeeShopDTO, dummyId, errors);
+        expect(updatedCoffeeShopDTO).toBe(null);
+    }
+});
 
-// test('Cannot update twice the same record', async () => {
-// let context = new CoffeeShopContext("localhost", "coolCaddyTest");
-// let connection = await context.connect("localhost", "coolCaddyTest");
-// if (connection) {
-// var errors = [];
-// let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("Cafeteria 1", errors);
-// expect(coffeeShopsDTO).not.toBe(null);
-// expect(coffeeShopsDTO.length).toBe(1);
-// expect(coffeeShopsDTO[0].kind).toBe("R");
-// errors = [];
-// let coffeeShopDTO = coffeeShopsDTO[0];
-// let newVatDTO = context.coffeeShopsService.putModel();
-// //copiamos todos los valores que tenemos en coffeeShopDTO
-// newVatDTO.id = coffeeShopDTO.id;
-// newVatDTO.rowVersion = coffeeShopDTO.rowVersion;
-// newVatDTO.kind = coffeeShopDTO.kind;
-// newVatDTO.displayName = coffeeShopDTO.displayName;
-// newVatDTO.percentage = coffeeShopDTO.percentage;
-// //Actualizamos
-// errors = [];
-// let updatedVatDTO = await context.coffeeShopsService.updateOne(coffeeShopDTO, coffeeShopDTO.id, errors);
-// expect(updatedVatDTO).not.toBe(null);
-// expect(updatedVatDTO.displayName).toBe(newVatDTO.displayName);
-// //Recuperamos los valores salvados
-// coffeeShopDTO.id = newVatDTO.id;
-// coffeeShopDTO.rowVersion = newVatDTO.rowVersion;
-// coffeeShopDTO.kind = newVatDTO.kind;
-// coffeeShopDTO.displayName = newVatDTO.displayName;
-// coffeeShopDTO.percentage = newVatDTO.percentage;
-// //Volvemos a actualizar 
-// updatedVatDTO = await context.coffeeShopsService.updateOne(coffeeShopDTO, coffeeShopDTO.id, errors);
-// //Ha de dar un nulo por rowVersion vieja
-// expect(updatedVatDTO).toBe(null);
+test('Cannot update twice the same record', async () => {
+    let context = new CoffeeShopContext("localhost", "coolCaddyTest");
+    let connection = await context.connect("localhost", "coolCaddyTest");
+    if (connection) {
+        var errors = [];
+        let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("Cafeteria 2", errors);
+        expect(coffeeShopsDTO).not.toBe(null);
+        expect(coffeeShopsDTO.length).toBe(1);
+        expect(coffeeShopsDTO[0].name).toBe("Cafeteria 2");
 
-// }
-// });
+        let coffeeShopDTO = coffeeShopsDTO[0];
+        let newCoffeeShopDTO = context.coffeeShopsService.putModel();
+        //copiamos todos los valores que tenemos en coffeeShopDTO
+        newCoffeeShopDTO.id = coffeeShopDTO.id;
+        newCoffeeShopDTO.rowVersion = coffeeShopDTO.rowVersion;
+        newCoffeeShopDTO.name = coffeeShopDTO.name;
+        newCoffeeShopDTO.displayName = coffeeShopDTO.displayName;
+        newCoffeeShopDTO.address = coffeeShopDTO.address;
+        newCoffeeShopDTO.pictureURL = coffeeShopDTO.pictureURL;
+        newCoffeeShopDTO.description = coffeeShopDTO.description;
+        //Actualizamos
 
-// test('Cannot update a keyIndex to an existing record', async () => {
-// let context = new CoffeeShopContext("localhost", "coolCaddyTest");
-// let connection = await context.connect("localhost", "coolCaddyTest");
-// if (connection) {
-// let coffeeShopDTO = context.coffeeShopsService.postModel();
-// coffeeShopDTO.kind = "N";
-// coffeeShopDTO.displayName = "Normal";
-// coffeeShopDTO.percentage = 0.21;
-// var errors = [];
-// let newVatDTO = await context.coffeeShopsService.createOne(coffeeShopDTO, errors);
-// expect(newVatDTO).not.toBe(null);
-// expect(newVatDTO.kind).toBe("N");
-// expect(newVatDTO.displayName).toBe("Normal");
-// expect(newVatDTO.percentage).toBe(0.21);
-// newVatDTO.kind = "X";
-// errors = [];
-// let updatedVatDTO = await context.coffeeShopsService.updateOne(newVatDTO, newVatDTO.id, errors);
-// expect(updatedVatDTO).not.toBe(null);
-// expect(updatedVatDTO.kind).toBe("X");
-// newVatDTO.kind = "R";
-// errors = [];
-// updatedVatDTO = await context.coffeeShopsService.updateOne(newVatDTO, newVatDTO.id, errors);
-// expect(updatedVatDTO).toBe(null);
+        let updatedCoffeeShopDTO = await context.coffeeShopsService.updateOne(coffeeShopDTO, coffeeShopDTO.id, errors);
+        expect(updatedCoffeeShopDTO).not.toBe(null);
+        expect(updatedCoffeeShopDTO.displayName).toBe(newCoffeeShopDTO.displayName);
+        //Recuperamos los valores salvados
+        updatedCoffeeShopDTO.id = newCoffeeShopDTO.id;
+        updatedCoffeeShopDTO.rowVersion = newCoffeeShopDTO.rowVersion;
+        updatedCoffeeShopDTO.name = newCoffeeShopDTO.name;
+        updatedCoffeeShopDTO.displayName = newCoffeeShopDTO.displayName;
+        updatedCoffeeShopDTO.address = newCoffeeShopDTO.address;
+        updatedCoffeeShopDTO.pictureURL = newCoffeeShopDTO.pictureURL;
+        updatedCoffeeShopDTO.description = newCoffeeShopDTO.description;
+        //Volvemos a actualizar 
+        updatedCoffeeShopDTO = await context.coffeeShopsService.updateOne(coffeeShopDTO, coffeeShopDTO.id, errors);
+        //Ha de dar un nulo por rowVersion vieja
+        expect(updatedCoffeeShopDTO).toBe(null);
+    }
+});
 
-// }
-// });
+test('Cannot update a keyIndex to an existing record', async () => {
+    let context = new CoffeeShopContext("localhost", "coolCaddyTest");
+    let connection = await context.connect("localhost", "coolCaddyTest");
+    if (connection) {
+        var errors = [];
+        let coffeeShopDTO = context.coffeeShopsService.postModel();
+        coffeeShopDTO.name = "CoffeeTest 1";
+        coffeeShopDTO.displayName = "CoffeeTest 1";
+        coffeeShopDTO.address = "Caleruega 102";
+        coffeeShopDTO.pictureURL = "CoffeeTest.png";
+        coffeeShopDTO.description = "Una cafeteria de tests";
 
-// test('ReadAll RecordsDTO', async () => {
-// let context = new CoffeeShopContext("localhost", "coolCaddyTest");
-// let connection = await context.connect("localhost", "coolCaddyTest");
-// if (connection) {
-// var filter = {};
-// var errors = [];
-// let coffeeShopsDTO = await context.coffeeShopsService.readAll(filter, errors);
-// expect(coffeeShopsDTO).not.toBe(null);
-// expect(coffeeShopsDTO.length).toBe(2);
-// }
-// });
+        let newCoffeeShopDTO = await context.coffeeShopsService.createOne(coffeeShopDTO, errors);
+        expect(newCoffeeShopDTO).not.toBe(null);
+        expect(newCoffeeShopDTO.name).toBe("CoffeeTest 1");
+        expect(newCoffeeShopDTO.displayName).toBe("CoffeeTest 1");
+        expect(newCoffeeShopDTO.address).toBe("Caleruega 102");
+        expect(newCoffeeShopDTO.pictureURL).toBe("CoffeeTest.png");
+        expect(newCoffeeShopDTO.description).toBe("Una cafeteria de tests");
 
-// test('Delete a record', async () => {
-// let context = new CoffeeShopContext("localhost", "coolCaddyTest");
-// let connection = await context.connect("localhost", "coolCaddyTest");
-// if (connection) {
-// var errors = [];
-// let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("Cafeteria 1", errors);
-// expect(coffeeShopsDTO).not.toBe(null);
-// expect(coffeeShopsDTO.length).toBe(1);
-// expect(coffeeShopsDTO[0].kind).toBe("R");
-// errors = [];
-// let coffeeShopDTO = coffeeShopsDTO[0];
-// errors = [];
-// let deletedResult = await context.coffeeShopsService.deleteOne(coffeeShopDTO.id, errors);
-// expect(deletedResult).toBe(true);
-// }
-// });
+        newCoffeeShopDTO.name = "CoffeeTest 2";
+        let updatedCoffeeShopDTO = await context.coffeeShopsService.updateOne(newCoffeeShopDTO, newCoffeeShopDTO.id, errors);
+        expect(updatedCoffeeShopDTO).not.toBe(null);
+        expect(updatedCoffeeShopDTO.name).toBe("CoffeeTest 2");
+        newCoffeeShopDTO.name = "CoffeeTest 3";
+        updatedCoffeeShopDTO = await context.coffeeShopsService.updateOne(newCoffeeShopDTO, newCoffeeShopDTO.id, errors);
+        expect(updatedCoffeeShopDTO).not.toBe(null);
+    }
+});
 
-// test('Deleting twice a record', async () => {
-// let context = new CoffeeShopContext("localhost", "coolCaddyTest");
-// let connection = await context.connect("localhost", "coolCaddyTest");
-// if (connection) {
-// var errors = [];
-// let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("Cafeteria 1", errors);
-// expect(coffeeShopsDTO).not.toBe(null);
-// expect(coffeeShopsDTO.length).toBe(1);
-// expect(coffeeShopsDTO[0].name).toBe("X");
-// errors = [];
-// let coffeeShopDTO = coffeeShopsDTO[0];
-// errors = [];
-// let deletedResult = await context.coffeeShopsService.deleteOne(coffeeShopDTO.id, errors);
-// expect(deletedResult).toBe(true);
-// let deleted2Result = await context.coffeeShopsService.deleteOne(coffeeShopDTO.id, errors);
-// expect(deleted2Result).toBe(false);
-// }
-// });
+test('ReadAll RecordsDTO', async () => {
+    let context = new CoffeeShopContext("localhost", "coolCaddyTest");
+    let connection = await context.connect("localhost", "coolCaddyTest");
+    if (connection) {
+        var filter = {};
+        var errors = [];
+        let coffeeShopsDTO = await context.coffeeShopsService.readAll(filter, errors);
+        expect(coffeeShopsDTO).not.toBe(null);
+        expect(coffeeShopsDTO.length).toBe(2);
+    }
+});
+
+test('Delete a record', async () => {
+    let context = new CoffeeShopContext("localhost", "coolCaddyTest");
+    let connection = await context.connect("localhost", "coolCaddyTest");
+    if (connection) {
+        var errors = [];
+        let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("Cafeteria 2", errors);
+        expect(coffeeShopsDTO).not.toBe(null);
+        expect(coffeeShopsDTO.length).toBe(1);
+        expect(coffeeShopsDTO[0].name).toBe("Cafeteria 2");
+        let coffeeShopDTO = coffeeShopsDTO[0];
+        let deletedResult = await context.coffeeShopsService.deleteOne(coffeeShopDTO.id, errors);
+        expect(deletedResult).toBe(true);
+    }
+});
+
+test('Deleting twice the same record', async () => {
+    let context = new CoffeeShopContext("localhost", "coolCaddyTest");
+    let connection = await context.connect("localhost", "coolCaddyTest");
+    if (connection) {
+        var errors = [];
+        let coffeeShopsDTO = await context.coffeeShopsService.findCoffeeShopsByName("CoffeeTest 3", errors);
+        expect(coffeeShopsDTO).not.toBe(null);
+        expect(coffeeShopsDTO.length).toBe(1);
+        expect(coffeeShopsDTO[0].name).toBe("CoffeeTest 3");
+        let coffeeShopDTO = coffeeShopsDTO[0];
+        let deletedResult = await context.coffeeShopsService.deleteOne(coffeeShopDTO.id, errors);
+        expect(deletedResult).toBe(true);
+        let deleted2Result = await context.coffeeShopsService.deleteOne(coffeeShopDTO.id, errors);
+        expect(deleted2Result).toBe(false);
+    }
+});

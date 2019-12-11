@@ -40,7 +40,7 @@ class CoffeeShopService extends CrudService {
     async canDeleteOne(coffeeShopId, errors) {
         var hasStocks = false;
         //Find Stocks
-        var stocks = await this.DAO.StockDAO.find({ coffeeShopId: coffeeShopId }).limit(1);
+        var stocks = await this.DAO.CoffeeShopDAO.find({ coffeeShopId: coffeeShopId }).limit(1);
         if (stocks) {
             hasStocks = stocks.length > 0;
             if (hasStocks) {
