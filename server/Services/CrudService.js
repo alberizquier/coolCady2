@@ -51,6 +51,7 @@ class CrudService extends BaseService {
         return allRecordsDTO;
     }
 
+    
 
     async readOne(id, errors) {
         //Busco un registro DAO y si se encuentra lo traspaso a un nuevo registro DTO y lo devuelvo.
@@ -65,7 +66,7 @@ class CrudService extends BaseService {
     }
 
     //Virtual method
-    async fillFieldsFullDTO(recordFullDTO) {
+    async fillFieldsFullDTO(recordFullDTO,errors) {
         //TO Be override by the derived service 
         return recordFullDTO;
     }

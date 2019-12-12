@@ -9,6 +9,7 @@ class FullStockDTO extends StockDTO {
         this["$type"] = "FullStockDTO";
         this.product = new ProductDTO();
         this.coffeeShop = new CoffeeShopDTO();
+        this.fullQuantity = 0; 
     }
 
 }

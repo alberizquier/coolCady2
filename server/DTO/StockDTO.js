@@ -5,12 +5,11 @@ class StockDTO extends BaseDTO {
         super();
         this["$type"] = "StockDTO";
         //Los inicializo para que cuando el Stock rellene un StockForm si algun dato falta al menos hay un valor por defecto en la BD
-        this.coffeeShopId = null;
-        this.productId = null;
+        this.coffeeShopId = "";
+        this.productId = "";
         this.quantityAcc = 0;
         this.quantityCon = 0;
         this.priceSell = 0;
-
     }
 
     //This is the balance method for the Qty calcs

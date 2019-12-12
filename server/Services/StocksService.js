@@ -11,12 +11,13 @@ class StockService extends CrudService {
 
     async fillFieldsFullDTO(fullStockDTO, errors) {
         fullStockDTO.coffeeShop = await this.loadStockCofeeShop(fullStockDTO.coffeeShopId, errors)
-        fullStockDTO.product = await this.loadStockProduct(fullStockDTO.productId, errors)
+        fullStockDTO.product = await this.loadStockProduct(fullStockDTO.productId, errors);
+        fullStockDTO.fullQuantity = fullStockDTO.quatity;
         return fullStockDTO;
     }
 
     async loadStockCofeeShop(id, errors) {
-        return await this.services.coffeeShopsServices.readOne(id, errors);
+        return await this.services.coffeeShopsService.readOne(id, errors);
     }
 
     async loadStockProduct(id, errors) {
@@ -25,12 +26,12 @@ class StockService extends CrudService {
 
     async checkFieldsId(stockDTO, errors) {
         var ok = true;
-        var coffeeShopDAO = await this.DAO.CoffeeShopDAO.findById(stockDAO.coffeeShopId);
+        var coffeeShopDAO = await this.DAO.CoffeeShopDAO.findById(stockDTO.coffeeShopId);
         if (!coffeeShopDAO) {
             ok = false;
             errors.push(`${this.nameService}.checkFieldsId(): coffeeShopId "${stockDTO.coffeeShopId}" not found`);
         }
-        var productDAO = await this.DAO.ProductDAO.findById(stockDAO.productId);
+        var productDAO = await this.DAO.ProductDAO.findById(stockDTO.productId);
         if (!productDAO) {
             ok = false;
             errors.push(`${this.nameService}.checkFieldsId(): productId "${stockDTO.productId}" not found`);
@@ -40,7 +41,7 @@ class StockService extends CrudService {
 
 
     async canCreateOne(stockDTO, errors) {
-        console.log(`${this.nameService}.canCreateOne(${stockDTO.kind}): enters`);
+        console.log(`${this.nameService}.canCreateOne(): enters`);
         if (await super.canCreateOne(stockDTO, errors)) {
             var stocksByCoffeeShopProduct = await this.findStocksByCoffeeShopProduct(stockDTO.coffeeShopId, stockDTO.productId, errors);
             if (stocksByCoffeeShopProduct) {

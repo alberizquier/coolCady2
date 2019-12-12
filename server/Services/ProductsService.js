@@ -8,6 +8,43 @@ class ProductService extends CrudService {
         super("ProductService", ProductDAO, ProductDTO, FullProductDTO, services);
     }
 
+    async fillFieldsFullDTO(fullProductDTO, errors) {
+        fullProductDTO.vat = await this.loadProductVAT(fullProductDTO.vatKind, errors);
+        fullProductDTO.stocks = await this.loadProductStocks(fullProductDTO.id, errors);
+        return fullProductDTO;
+    }
+
+    async loadProductVAT(vatKind, errors) {
+        let filter = {
+            kind: vatKind
+        };
+        let vatsDTO = await this.services.vatsService.readAll(filter,errors); 
+        if(vatsDTO){
+            if(vatsDTO.length > 0){
+                return vatsDTO[0];
+            }
+        }
+        else{
+            return null;
+        }
+    }
+
+    async loadProductStocks(productId, errors) {
+        let result = [];
+        let filter = {
+            productId: productId
+        };
+        var stocksDTO = await this.services.stocksService.readAll(filter, errors);
+        if (stocksDTO) {
+            for (let stockDTO of stocksDTO) {
+                let fullStockDTO = await this.services.stocksService.readFullOne(stockDTO.id, errors);
+                if (fullStockDTO) {
+                    result.push(fullStockDTO);
+                }
+            }
+        }
+        return result;
+    }
 
     async canCreateOne(productDTO, errors) {
         console.log(`${this.nameService}.canCreateOne(${productDTO.name}): enters`);
@@ -40,7 +77,9 @@ class ProductService extends CrudService {
     async canDeleteOne(productId, errors) {
         var hasStocks = false;
         //Find Stocks
-        var stocks = await this.DAO.StockDAO.find({ productId: productId }).limit(1);
+        var stocks = await this.DAO.StockDAO.find({
+            productId: productId
+        }).limit(1);
         if (stocks) {
             hasStocks = stocks.length > 0;
             if (hasStocks) {

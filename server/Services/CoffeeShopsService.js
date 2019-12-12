@@ -8,6 +8,28 @@ class CoffeeShopService extends CrudService {
         super("CoffeeShopService", CoffeeShopDAO, CoffeeShopDTO, FullCoffeeShopDTO, services);
     }
 
+    async fillFieldsFullDTO(fullCoffeeShopDTO, errors) {
+        fullCoffeeShopDTO.stocks = await this.loadCoffeeShopsStocks(fullCoffeeShopDTO.id, errors);
+        return fullCoffeeShopDTO;
+    }
+
+    async loadCoffeeShopsStocks(coffeeShopId, errors) {
+        let result = [];
+        let filter = {
+            coffeeShopId: coffeeShopId
+        };
+        var stocksDTO = await this.services.stocksService.readAll(filter, errors);
+        if (stocksDTO) {
+            for (let stockDTO of stocksDTO) {
+                let fullStockDTO = await this.services.stocksService.readFullOne(stockDTO.id, errors);
+                if(fullStockDTO){
+                    result.push(fullStockDTO);
+                }
+            }
+        }
+        return result;
+    }
+
 
     async canCreateOne(coffeeShopDTO, errors) {
         console.log(`${this.nameService}.canCreateOne(${coffeeShopDTO.name}): enters`);

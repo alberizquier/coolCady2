@@ -71,11 +71,11 @@ test('Cannot duplicate a record', async () => {
     let context = new VATContext("localhost", "coolCaddyTest");
     let connection = await context.connect("localhost", "coolCaddyTest");
     if (connection) {
+        var errors = [];
         let vatDTO = context.vatsService.model();
         vatDTO.kind = "R";
         vatDTO.displayName = "Reduced";
         vatDTO.percentage = 0.15;
-        var errors = [];
         let newVatDTO = await context.vatsService.createOne(vatDTO, errors);
         expect(newVatDTO).toBe(null);
     }
@@ -106,7 +106,6 @@ test('Can read a fullRecordDTO', async () => {
         expect(vatsDTO).not.toBe(null);
         expect(vatsDTO.length).toBe(1);
         expect(vatsDTO[0].kind).toBe("R");
-        errors = [];
         let vatDTO = await context.vatsService.readFullOne(vatsDTO[0].id, errors);
         expect(vatDTO).not.toBe(null);
         expect(vatDTO.id).toBe(vatsDTO[0].id);
