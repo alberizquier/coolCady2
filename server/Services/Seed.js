@@ -5,8 +5,6 @@ const StockDAO = require('../DAO/StockDAO');
 const UserDAO = require('../DAO/UserDAO');
 const VATDAO = require('../DAO/VATDAO');
 
-
-
 class Seed {
     constructor(data) {
         this.data = data;
@@ -26,7 +24,6 @@ class Seed {
         await this.seedVATs();
         await this.seedCoffeeShops();
     }
-
 
     async seedUser(email, password, isAdmin, pictureURL) {
         var userDAO = new UserDAO();
@@ -153,7 +150,7 @@ class Seed {
                         productDAO.kind = dish.type ? dish.type : "";
                         productDAO.subKind = dish.kind ? dish.kind : "";
                         productDAO.remarks = dish.notes;
-                        productDAO.ingredients = dish.ingredients;
+                        productDAO.ingredient = dish.ingredients;
                         productDAO.vatKind = "R";
                         productDAO.priceCost = dish.price;
                         productDAO.pictureURL = dish.img;

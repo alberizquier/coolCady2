@@ -7,8 +7,7 @@ class UserService extends CrudService {
     constructor(services) {
         super("UserService", UserDAO, UserDTO, FullUserDTO, services);
     }
-
-
+    
     async canCreateOne(userDTO, errors) {
         console.log(`${this.emailService}.canCreateOne(${userDTO.email}): enters`);
         if (await super.canCreateOne(userDTO, errors)) {

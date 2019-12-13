@@ -146,8 +146,6 @@ class BaseAPI {
         console.log(`${this.nameAPI}API.${error}: error(${statusCode}) message: ${messages}`);
         res.status(statusCode).send(new ErrorEventAPI(`${this.nameAPI}API.${error}`, messages));
     }
-
-
 }
 
 class ErrorEventAPI {
@@ -155,7 +153,6 @@ class ErrorEventAPI {
         this.error = errorCode;
         this.message = message;
     }
-
 }
 
 module.exports = BaseAPI, ErrorEventAPI;

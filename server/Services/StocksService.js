@@ -8,7 +8,6 @@ class StockService extends CrudService {
         super("StockService", StockDAO, StockDTO, FullStockDTO, services);
     }
 
-
     async fillFieldsFullDTO(fullStockDTO, errors) {
         fullStockDTO.coffeeShop = await this.loadStockCofeeShop(fullStockDTO.coffeeShopId, errors)
         fullStockDTO.product = await this.loadStockProduct(fullStockDTO.productId, errors);
@@ -38,7 +37,6 @@ class StockService extends CrudService {
         }
         return ok;
     }
-
 
     async canCreateOne(stockDTO, errors) {
         console.log(`${this.nameService}.canCreateOne(): enters`);

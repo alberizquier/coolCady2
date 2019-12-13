@@ -30,7 +30,6 @@ class CoffeeShopService extends CrudService {
         return result;
     }
 
-
     async canCreateOne(coffeeShopDTO, errors) {
         console.log(`${this.nameService}.canCreateOne(${coffeeShopDTO.name}): enters`);
         if (await super.canCreateOne(coffeeShopDTO, errors)) {

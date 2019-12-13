@@ -6,10 +6,8 @@ class CrudAPI extends BaseAPI {
         this.crudService = crudService;
 
         //Aux endPoints
-
         app.post(`${this.uri}/seed`, this.seed.bind(this)); //OK
         app.post(`${this.uri}/unseed`, this.unseed.bind(this)); //OK
-
 
         app.get(`${this.uri}/model/full`, this.fullModel.bind(this));
         app.get(`${this.uri}/model/get`, this.model.bind(this));
@@ -17,7 +15,6 @@ class CrudAPI extends BaseAPI {
         app.get(`${this.uri}/model/put`, this.putModel.bind(this));
 
         app.get(`${this.uri}/model`, this.model.bind(this));
-
 
         //CRUD Endpoints
         app.get(`${this.uri}/:id/full`, this.readFullOne.bind(this)); //OK
@@ -59,8 +56,6 @@ class CrudAPI extends BaseAPI {
             this.sendError(res, this.ST_InternalServerError, "putModel()", err.message);
         };
     };
-
-
 
     async model(req, res) {
         console.log(`API ${this.nameAPI}: model(): `);
@@ -107,7 +102,6 @@ class CrudAPI extends BaseAPI {
         };
     };
 
-
     async unseed(req, res) {
         console.log(`API ${this.nameAPI}: unseed(): `);
         try {
@@ -145,7 +139,6 @@ class CrudAPI extends BaseAPI {
         }
         return filter;
     }
-
 
     //#region CRUD
     async readAll(req, res) {
@@ -277,7 +270,6 @@ class CrudAPI extends BaseAPI {
         };
     }
     //#endregion
-
 
 }
 

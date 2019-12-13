@@ -9,11 +9,11 @@ class ProductDTO extends BaseDTO {
         this.displayName = "";
         this.kind = "";
         this.subKind = "";
-        this.ingredient = "";
+        this.ingredients = "";
         this.priceCost = 0;
         this.vatKind = "R";
         this.remarks = "";
-        this.pictureUR = "";
+        this.pictureURL = "";
     }
 }
 

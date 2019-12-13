@@ -4,12 +4,12 @@ const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
 
-const VATsAPI = require('./API/VATsAPI');
-const ProductsAPI = require('./API/ProductsAPI');
 const CoffeeShopsAPI = require('./API/CoffeeShopsAPI');
-const StocksAPI = require('./API/StocksAPI');
-const DocHeadersAPI = require('./API/DocHeadersAPI');
 const DocDetailsAPI = require('./API/DocDetailsAPI');
+const DocHeadersAPI = require('./API/DocHeadersAPI');
+const ProductsAPI = require('./API/ProductsAPI');
+const StocksAPI = require('./API/StocksAPI');
+const VATsAPI = require('./API/VATsAPI');
 
 var Seed = require('../server/Services/Seed');
 var data = require('../server/data/data');
@@ -25,7 +25,6 @@ const CoffeeShopsService = require('./Services/CoffeeShopsService');
 services.DAO.CoffeeShopDAO = CoffeeShopDAO;
 services.DTO.CoffeeShopDTO = CoffeeShopDTO;
 services.DTO.FullCoffeeShopDTO = FullCoffeeShopDTO;
-
 //#endregion
 
 //#region DocHeader
@@ -36,8 +35,6 @@ const DocHeadersService = require('./Services/DocHeadersService');
 services.DAO.DocHeaderDAO = DocHeaderDAO;
 services.DTO.DocHeaderDTO = DocHeaderDTO;
 services.DTO.FullDocHeaderDTO = FullDocHeaderDTO;
-
-
 //#endregion
 
 //#region DocDetail
@@ -48,8 +45,6 @@ const DocDetailsService = require('./Services/DocDetailsService');
 services.DAO.DocDetailDAO = DocDetailDAO;
 services.DTO.DocDetailDTO = DocDetailDTO;
 services.DTO.FullDocDetailDTO = FullDocDetailDTO;
-
-
 //#endregion
 
 //#region KindProduct
@@ -60,7 +55,6 @@ const KindProductsService = require('./Services/KindProductsService');
 services.DAO.KindProductDAO = KindProductDAO;
 services.DTO.KindProductDTO = KindProductDTO;
 services.DTO.FullKindProductDTO = FullKindProductDTO;
-
 //#endregion
 
 //#region Stock
@@ -71,7 +65,6 @@ const StocksService = require('./Services/StocksService');
 services.DAO.StockDAO = StockDAO;
 services.DTO.StockDTO = StockDTO;
 services.DTO.FullStockDTO = FullStockDTO;
-
 //#endregion
 
 //#region Products
@@ -82,7 +75,6 @@ const ProductsService = require('./Services/ProductsService');
 services.DAO.ProductDAO = ProductDAO;
 services.DTO.ProductDTO = ProductDTO;
 services.DTO.FullProductDTO = FullProductDTO;
-
 //#endregion
 
 //#region User
@@ -93,7 +85,6 @@ const UsersService = require('./Services/UsersService');
 services.DAO.UserDAO = UserDAO;
 services.DTO.UserDTO = UserDTO;
 services.DTO.FullUserDTO = FullUserDTO;
-
 //#endregion
 
 //#region VAT
@@ -104,9 +95,8 @@ const VATsService = require('./Services/VATsService');
 services.DAO.VATDAO = VATDAO;
 services.DTO.VATDTO = VATDTO;
 services.DTO.FullVATDTO = FullVATDTO;
-
-
 //#endregion
+
 //#region Services
 services.services.coffeeShopsService = new CoffeeShopsService(services);
 services.services.docDetailsService = new DocDetailsService(services);
@@ -132,10 +122,7 @@ const coffeeShopsAPI = new CoffeeShopsAPI('/api',app,services.services);
 const stocksAPI = new StocksAPI('/api',app,services.services)
 const docHeadersAPI = new DocHeadersAPI('/api',app,services.services)
 const docDetailsAPI = new DocDetailsAPI('/api',app,services.services)
-
-
 //#endregion
-
 
 async function startApp() {
     try {
@@ -153,12 +140,6 @@ async function startApp() {
     } catch (error) {
         console.log("Couldn't connect to Mongoose/coolCaddy");
     }
-
-
-
-
-
-
 }
 
 function showFullStockDTO(stockFullDTO) {
@@ -265,7 +246,5 @@ async function appInit() {
 //     }
 // }
 }
-
-
 
 startApp();

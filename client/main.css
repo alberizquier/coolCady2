@@ -12,7 +12,7 @@ div.caddy {
 div.cafes div.card {
     width: 50%;
     height: 49vh;
-    background-image: url('assets/dishes/cup&cake/bgCupCake.jpg');
+    background-image: url('/client/assets/dishes/cupAndcake/bgCupCake.jpg');
     background-position: center;
     background-size: cover;
     float: left;
@@ -61,34 +61,34 @@ div.caddy img#caddyBag {
     margin-right: 10px;
 }
 
-div.caddyBody{
+div.caddyBody {
     height: 60%;
 }
 
-div.caddyBody div.container{
+div.caddyBody div.container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 
-div.caddyBody div.container h3#itemCounter{
+div.caddyBody div.container h3#itemCounter {
     margin-right: 3px;
     font-size: 18pt;
 }
 
-div.caddyBody div.container h3#union{
+div.caddyBody div.container h3#union {
     margin-right: 3px;
     font-size: 18pt;
 }
 
-div.caddyBody div.container img{
+div.caddyBody div.container img {
     height: 50px;
     margin: 0 5px;
     border-radius: 20px;
 }
 
-div.caddyBody div.container input#selectedItem{
+div.caddyBody div.container input#selectedItem {
     width: 40%;
     height: 48px;
     border: none;
@@ -98,7 +98,7 @@ div.caddyBody div.container input#selectedItem{
     font-size: 14pt;
 }
 
-div.caddyBody div.container input#selectedPrice{
+div.caddyBody div.container input#selectedPrice {
     width: 15%;
     height: 48px;
     border: none;
@@ -109,7 +109,7 @@ div.caddyBody div.container input#selectedPrice{
     font-size: 14pt;
 }
 
-div.caddyBody div.container button{
+div.caddyBody div.container button {
     height: 50px;
     width: 10%;
     border: none;
@@ -117,6 +117,61 @@ div.caddyBody div.container button{
     border-radius: 20px;
 }
 
-div.caddyFooter{
+div.caddyFooter {}
 
+div.white {
+    background-color: rgb(255, 255, 255, 0.60);
+    height: 95vh;
+}
+
+div.cafeteriasProductArea {
+    height: 95vh;
+    width: 69%;
+    background-image: url('/client/assets/dishes/cupAndcake/bgCupCakeBig.jpg');
+    background-size: cover;
+}
+
+div#coffeeShopHeader {
+    padding: 5px;
+}
+
+div#coffeeShopHeader h2 {
+    color: black;
+    text-align: center;
+    font-size: 28pt;
+}
+
+div#coffeeShopHeader button {
+    float: left;
+    font-size: 20pt;
+    background-color: rgb(255, 255, 255, 0);
+    color: black;
+    border: 2pt solid black;
+    margin: 10px;
+}
+
+.coffeeShopBody {
+    width: 90%;
+    height: 10vh;
+    background-color: red;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row ;
+    flex-wrap: center;
+    justify-content:center;
+}
+
+.coffeeShop_stock{
+    width: 90%;
+    height: 10vh;
+    background-color: red;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row ;
+    flex-wrap: center;
+    justify-content:start;
+}
+
+.stock_product_img {
+    height: 10vh;
 }

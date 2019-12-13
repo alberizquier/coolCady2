@@ -3,7 +3,7 @@ const CrudAPI = require('./CrudAPI');
 
 class ProductsAPI extends CrudAPI {
     constructor(uri, app,services) {
-        super(uri + '/Products', app, "Products",services.productsService);
+        super(uri + '/products', app, "Products",services.productsService);
     }
 }
 

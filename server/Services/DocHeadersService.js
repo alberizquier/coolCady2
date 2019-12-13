@@ -36,9 +36,9 @@ class DocHeaderService extends CrudService {
         return result;
     }
 
-    async newCaddy(coffeShopId, errors) {
+    async newCaddy(coffeeShopId, errors) {
         let docHeaderDTO = this.model();
-        docHeaderDTO.coffeShopId = coffeShopId;
+        docHeaderDTO.coffeeShopId = coffeeShopId;
         docHeaderDTO.year = 2019;
         docHeaderDTO.docNumber = 1;
         docHeaderDTO.sellerId = "gus";
@@ -47,7 +47,7 @@ class DocHeaderService extends CrudService {
         docHeaderDTO.docState = "open";
         docHeaderDTO = await this.createOne(docHeaderDTO, errors);
         if (docHeaderDTO) {
-            fullDocHeaderDTO = await this.readFullOne(docHeaderDTO.id, errors);
+            let fullDocHeaderDTO = await this.readFullOne(docHeaderDTO.id, errors);
             return fullDocHeaderDTO;
         }
         return null;
