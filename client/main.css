@@ -27,6 +27,8 @@ div.cafes div.card div.black {
     text-align: center;
     transition-property: opacity;
     transition-duration: 0.5s;
+    font-family: 'Amatic SC', cursive;
+    font-size: 40pt;
 }
 
 div.cafes div.card div.black:hover {
@@ -37,6 +39,8 @@ div.cafes div.card div.black:hover {
     font-size: 28pt;
     text-align: center;
     border: 2pt inset orange;
+    font-family: 'Amatic SC', cursive;
+    font-size: 40pt;
 }
 
 div.cafes div.card div.black img {
@@ -48,6 +52,8 @@ div.caddy {
     color: white;
     padding: 15px;
     height: 95vh;
+    font-family: 'Maven Pro', sans-serif;
+    background-image: url(./assets/bgCaddy.png);
 }
 
 div.caddy h1 {
@@ -82,7 +88,7 @@ div.caddyBody div.container h3#union {
     font-size: 18pt;
 }
 
-div.caddyBody div.container img {
+div.caddyBody div.container img#itemImage {
     height: 50px;
     margin: 0 5px;
     border-radius: 20px;
@@ -150,7 +156,7 @@ div#coffeeShopHeader button {
     margin: 10px;
 }
 
-.coffeeShopBody {
+div.coffeeShopBody {
     width: 90%;
     height: 10vh;
     background-color: red;
@@ -161,7 +167,7 @@ div#coffeeShopHeader button {
     justify-content:center;
 }
 
-.coffeeShop_stock{
+div.coffeeShop_stock{
     width: 90%;
     height: 10vh;
     background-color: red;
@@ -172,6 +178,6 @@ div#coffeeShopHeader button {
     justify-content:start;
 }
 
-.stock_product_img {
+div.stock_product_img {
     height: 10vh;
 }

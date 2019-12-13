@@ -188,63 +188,8 @@ function showFullCoffeeShopDTO(coffeeShopFullDTO) {
 
 async function appInit() {
     console.log("Server listening on port 3000");
-    app.listen(3000);
+    await app.listen(3000);
 
-// const seed = new Seed(data);
-// await seed.seed();
-// let errors = [];
-// let filter = {};
-// let coffeeShopsDTO = await services.services.coffeeShopsService.readAll(filter, errors);
-// if (coffeeShopsDTO) {
-//     for (let coffeeShopDTO of coffeeShopsDTO) {
-//         errors = [];
-//         //let stocksDTO = await services.services.stocksService.readAll({coffeeShopId : coffeeShopDTO.id},errors);
-//         //console.log(stocksDTO);
-//         let coffeeShopFullDTO = await services.services.coffeeShopsService.readFullOne(coffeeShopDTO.id, errors);
-//         if (coffeeShopFullDTO) {
-
-//             showFullCoffeeShopDTO(coffeeShopFullDTO);
-//         }
-//         else{
-//             console.log(`errors:ReadFullOne():`,errors.join());
-//         }
-//         break;
-//     }
-// }
-
-// let productsDTO = await services.services.productsService.readAll(filter, errors);
-// if (productsDTO) {
-//     for (let productDTO of productsDTO) {
-//         errors = [];
-//         //let stocksDTO = await services.services.stocksService.readAll({productId : productDTO.id},errors);
-//         //console.log(stocksDTO);
-//         let productFullDTO = await services.services.productsService.readFullOne(productDTO.id, errors);
-//         if (productFullDTO) {
-
-//             showFullProductDTO(productFullDTO);
-//         }
-//         else{
-//             console.log(`errors:ReadFullOne():`,errors.join());
-//         }
-//         break;
-//     }
-// }
-
-// let errors = [];
-// let filter = {};
-// let stocksDTO = await services.services.stocksService.readAll(filter, errors);
-// if (stocksDTO) {
-//     for (let stockDTO of stocksDTO) {
-//         errors = [];
-//         let stockFullDTO = await services.services.stocksService.readFullOne(stockDTO.id, errors);
-//         if (stockFullDTO) {
-//             showFullStockDTO(stockFullDTO);
-//         }
-//         else{
-//             console.log(`errors:ReadFullOne():`,errors.join());
-//         }
-//     }
-// }
 }
 
 startApp();
