@@ -49,3 +49,11 @@ export async function addProduct(caddyId,productId,quantity,price,cbCaddy){
     }
 }
 
+export async function deleteOneProduct(caddyId,productId,quantity,price,cbCaddy){
+    var errors = [];
+    var caddy = await clientAPI.deleteOneProduct(caddyId,productId,quantity,price, errors);
+    if (caddy) {
+        cbCaddy(caddy);
+    }
+}
+

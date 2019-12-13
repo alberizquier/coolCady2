@@ -3,7 +3,8 @@ import {
     refreshCoffeeShop,
     newCaddy,
     askCaddy,
-    addProduct
+    addProduct,
+    deleteOneProduct
 } from './main.js';
 
 var currentCaddy = null;
@@ -72,8 +73,8 @@ function displayCoffeeShop(coffeeShop) {
         coffeeShop_stock_pictureNode.setAttribute('src', `/client/assets/dishes${stock.product.pictureURL}`);
         coffeeShop_stock_pictureNode.setAttribute('class', 'stock_product_img');
         btnAddToCaddyNode.stock = stock;
-        btnAddToCaddyNode.addEventListener('click', async ()=>{
-          await addToCaddy(stock.productId,1,stock.priceSell);
+        btnAddToCaddyNode.addEventListener('click', async () => {
+            await addToCaddy(stock.productId, 1, stock.priceSell);
         });
 
         coffeeShop_stock_product_displayNameNode.textContent = stock.product.displayName;
@@ -106,9 +107,22 @@ function displayCaddy(caddy) {
         caddyBodyNode.appendChild(buttonRemoveOneNode);
         caddyBodyNode.appendChild(buttonRemoveSelectionNode);
         containerNode.setAttribute('class', 'container');
+        itemCounterNode.setAttribute('id', 'itemCounter');
+        unionNode.setAttribute('id', 'union');
+        imgNode.setAttribute('id', 'itemImage');
+        imgNode.setAttribute('src', `/client/assets/dishes${docDetail.product.pictureURL}`);
+        inputTextNode.setAttribute('id', 'selectedItem');
+        inputPriceNode.setAttribute('id', 'selectedPrice');
+        buttonRemoveOneNode.setAttribute('id', 'removeOneItemFromCaddy');
+        buttonRemoveOneNode.addEventListener('click', async () => {
+            console.log('stock.productId',docDetail.productId);
+            await removeOneItemFromCaddy(docDetail.productId, 1, docDetail.priceSell);
+        })
+        buttonRemoveSelectionNode.setAttribute('id', 'removeSelectionFromCaddy');
+        buttonRemoveOneNode.textContent = '-';
+        buttonRemoveSelectionNode.textContent = 'X';
         itemCounterNode.textContent = docDetail.quantity;
         unionNode.textContent = "X";
-        imgNode.setAttribute('src', `/client/assets/dishes${docDetail.product.pictureURL}`)
         inputTextNode.value = docDetail.product.displayName;
         inputPriceNode.value = docDetail.price;
     }
@@ -132,11 +146,15 @@ function btnRefreshAreasClick() {
 }
 
 async function requestCaddy() {
-    await askCaddy(currentCaddy.id,displayCaddy.bind(this));
+    await askCaddy(currentCaddy.id, displayCaddy.bind(this));
 }
 
-async function addToCaddy(productId,quantity,price) {
-    await addProduct(currentCaddy.id,productId,quantity,price,displayCaddy.bind(this));
+async function addToCaddy(productId, quantity, price) {
+    await addProduct(currentCaddy.id, productId, quantity, price, displayCaddy.bind(this));
+}
+
+async function removeOneItemFromCaddy(productId, quantity, price) {
+    await deleteOneProduct(currentCaddy.id, productId, quantity, price, displayCaddy.bind(this));
 }
 
 function hideNode(nameNode, hidden) {
@@ -157,10 +175,6 @@ function btnCoffeeShopClick(id) {
 }
 
 
-
-function removeOneItemFromCaddy() {
-
-}
 
 function removeSelectionFromCaddy() {
 
