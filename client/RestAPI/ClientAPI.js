@@ -23,31 +23,6 @@ function postAjax(url, data) {
     });
 };
 
-function deleteAjax(url, data) {
-    // return a new promise. 
-    return new Promise(function (resolve, reject) {
-        // do the usual XHR stuff 
-        var req = new XMLHttpRequest();
-        req.open('delete', url);
-        //NOW WE TELL THE SERVER WHAT FORMAT OF POST REQUEST WE ARE MAKING 
-        req.setRequestHeader('Content-Type', 'application/json');
-        req.onload = function () {
-            console.log('PostAjaxOnload()', req);
-            if (req.status == 200) {
-                resolve(req.response);
-            } else {
-                reject(Error(req.statusText));
-            }
-        };
-        // handle network errors 
-        req.onerror = function () {
-            reject(Error("Network Error"));
-        }; // make the request 
-        req.send(data);
-        //same thing if i hardcode like //req.send("limit=2"); 
-    });
-};
-
 export class ClientAPI {
     constructor(hostName, portNumber, apiPath) {
         this.hostName = hostName;
@@ -124,20 +99,29 @@ export class ClientAPI {
         return null;
     }
 
-    async deleteOneProduct(caddyId, productId, quantity, price, errors) {
+    async removeProduct(caddyId, productId,errors) {
         try {
+            //object to be included in the body request before json.stringify();
             var data = {
                 docHeaderId: caddyId,
                 productId: productId,
-                quantity: quantity,
-                price: price,
+                quantity: 0,
+                price: 0,
                 percentageDiscount: 0,
                 vatKind: "R",
                 title: "",
                 remarks: ""
             };
-            var response = await deleteAjax(`${this.uri}/caddy/product/${caddyId}`, JSON.stringify(data));
-            var dataJson = JSON.parse(response);
+            var fetchParams = {
+                method: 'DELETE', 
+                body: JSON.stringify(data), 
+                headers:{
+                  'Content-Type': 'application/json'
+                }
+            };
+            //call to fetch(Endpoint, fetchParams);
+            var response = await fetch(`${this.uri}/caddy/product/${caddyId}`,fetchParams);
+            var dataJson = await response.json();
             return dataJson;
         } catch (error) {
             errors.push(error.message);

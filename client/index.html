@@ -130,19 +130,19 @@
                 <img id="itemImage" src="/client/assets/dishes/cupAndcake/carrotCupCake.png" alt="">
                 <input type="text" value="Carrot Cake" id="selectedItem" disabled=true>
                 <input type="text" value="10,00" id="selectedPrice" disabled=true>
-                <button id="removeOneItemFromCaddy" onclick="removeOneItemFromCaddy()">-</button>
-                <button id="removeSelectionFromCaddy" onclick="removeSelectionFromCaddy()">X</button>
+                <button id="removeOneItemFromCaddy">-</button>
+                <button id="removeSelectionFromCaddy">X</button>
             </div>
         </div>
 
         <!--CADDY FOOTER AMOUNT-->
         <div class="caddyFooter">
             <div id="amount">
-                <h2>Total:</h2><input type="text" value="10,00€" id="total" disabled=true>
+                <h2>Total:</h2><input type="text" id="taxBaseR" disabled=true>
                 <hr>
-                <h2>VAT 10%:</h2><input type="text" value="1,00€" id="priceVat" disabled=true>
+                <h2>VAT 10%:</h2><input type="text" id="vatBaseR" disabled=true>
                 <hr>
-                <h2>TOTAL PRICE:</h2><input type="text" value="11,00€" id="priceTotal" disabled=true>
+                <h2>TOTAL PRICE:</h2><input type="text" id="amountDue" disabled=true>
             </div>
             <button>Order!</button>
         </div>

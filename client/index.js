@@ -4,7 +4,7 @@ import {
     newCaddy,
     askCaddy,
     addProduct,
-    deleteOneProduct
+    removeProduct
 } from './main.js';
 
 var currentCaddy = null;
@@ -88,6 +88,18 @@ function displayCoffeeShop(coffeeShop) {
 function displayCaddy(caddy) {
     currentCaddy = caddy;
     let caddyBodyNode = document.getElementById('caddyBody');
+    let taxBaseRNode = document.getElementById('taxBaseR');
+    let vatBaseRNode = document.getElementById('vatBaseR');
+    let amountDueNode = document.getElementById('amountDue');
+    
+    taxBaseRNode.value = `${caddy.taxBaseR.toFixed(2)} €`;
+    amountDueNode.value = `${caddy.amountDue.toFixed(2)} €`;
+
+    //el amount del vat no viene calculado! Se ha de calcular dinamicamente
+    let vatBaseR = caddy.taxBaseR * caddy.percentageBaseR;
+
+    vatBaseRNode.value = `${vatBaseR.toFixed(2)} €`;
+
     caddyBodyNode.innerHTML = '';
     for (let docDetail of caddy.docDetails) {
         let containerNode = document.createElement('div');
@@ -98,6 +110,7 @@ function displayCaddy(caddy) {
         let inputPriceNode = document.createElement('input');
         let buttonRemoveOneNode = document.createElement('button');
         let buttonRemoveSelectionNode = document.createElement('button');
+
         caddyBodyNode.appendChild(containerNode);
         caddyBodyNode.appendChild(itemCounterNode);
         caddyBodyNode.appendChild(unionNode);
@@ -113,10 +126,10 @@ function displayCaddy(caddy) {
         imgNode.setAttribute('src', `/client/assets/dishes${docDetail.product.pictureURL}`);
         inputTextNode.setAttribute('id', 'selectedItem');
         inputPriceNode.setAttribute('id', 'selectedPrice');
-        buttonRemoveOneNode.setAttribute('id', 'removeOneItemFromCaddy');
+        buttonRemoveOneNode.setAttribute('id', 'removeFromCaddy');
         buttonRemoveOneNode.addEventListener('click', async () => {
-            console.log('stock.productId',docDetail.productId);
-            await removeOneItemFromCaddy(docDetail.productId, 1, docDetail.priceSell);
+            console.log('stock.productId', docDetail.productId);
+            await removeFromCaddy(docDetail.productId);
         })
         buttonRemoveSelectionNode.setAttribute('id', 'removeSelectionFromCaddy');
         buttonRemoveOneNode.textContent = '-';
@@ -153,8 +166,8 @@ async function addToCaddy(productId, quantity, price) {
     await addProduct(currentCaddy.id, productId, quantity, price, displayCaddy.bind(this));
 }
 
-async function removeOneItemFromCaddy(productId, quantity, price) {
-    await deleteOneProduct(currentCaddy.id, productId, quantity, price, displayCaddy.bind(this));
+async function removeFromCaddy(productId) {
+    await removeProduct(currentCaddy.id, productId, displayCaddy.bind(this));
 }
 
 function hideNode(nameNode, hidden) {

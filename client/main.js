@@ -49,9 +49,9 @@ export async function addProduct(caddyId,productId,quantity,price,cbCaddy){
     }
 }
 
-export async function deleteOneProduct(caddyId,productId,quantity,price,cbCaddy){
+export async function removeProduct(caddyId,productId,cbCaddy){
     var errors = [];
-    var caddy = await clientAPI.deleteOneProduct(caddyId,productId,quantity,price, errors);
+    var caddy = await clientAPI.removeProduct(caddyId,productId, errors);
     if (caddy) {
         cbCaddy(caddy);
     }
