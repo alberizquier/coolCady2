@@ -69,6 +69,14 @@ div.caddy img#caddyBag {
 
 div.caddyBody {
     height: 60%;
+    background-color: rgb(255, 255, 255, 0.75);
+    color: black;
+    padding: 5px 20px;
+    font-size: 8pt;
+}
+
+div.caddyBody h2 {
+    font-size: 15pt;
 }
 
 div.caddyBody div.container {
@@ -76,54 +84,90 @@ div.caddyBody div.container {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 div.caddyBody div.container h3#itemCounter {
     margin-right: 3px;
-    font-size: 18pt;
+    font-size: 12pt;
 }
 
 div.caddyBody div.container h3#union {
-    margin-right: 3px;
-    font-size: 18pt;
+    margin-right: 10px;
+    font-size: 12pt;
 }
 
 div.caddyBody div.container img#itemImage {
     height: 50px;
     margin: 0 5px;
-    border-radius: 20px;
 }
 
 div.caddyBody div.container input#selectedItem {
     width: 40%;
     height: 48px;
+    background-color: rgb(255, 255, 255, 0);
     border: none;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     padding-left: 10px;
-    font-size: 14pt;
+    font-size: 12pt;
+    color: black;
 }
 
 div.caddyBody div.container input#selectedPrice {
     width: 15%;
     height: 48px;
+    background-color: rgb(255, 255, 255, 0);
     border: none;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     padding-right: 10px;
     text-align: right;
-    font-size: 14pt;
+    font-size: 10pt;
+    color: black;
 }
 
 div.caddyBody div.container button {
-    height: 50px;
-    width: 10%;
+    height: 30px;
+    width: 30px;
+    background-image: url(./assets/bgCaddy.png);
+    color: white;
     border: none;
     margin: 0 5px;
-    border-radius: 20px;
+    border-radius: 50%;
 }
 
-div.caddyFooter {}
+div.caddyFooter {
+    height: 23vh;
+    background-color: rgb(255, 255, 255, 0.75);
+    color: black;
+    padding: 5px 20px;
+    font-size: 8pt;
+}
+
+div.caddyFooter input {
+    float: right;
+    margin-top: -32px;
+    text-align: right;
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+    color: black;
+}
+
+div.caddyFooter input#priceTotal {
+    font-weight: bold;
+}
+
+div.caddyFooter button {
+    margin-top: 5px;
+    width: 100%;
+    height: 7vh;
+    font-size: 14pt;
+    font-weight: bold;
+    background-image: url(./assets/bgCaddy.png);
+    color: white;
+    border: none;
+}
 
 div.white {
     background-color: rgb(255, 255, 255, 0.60);
@@ -162,20 +206,20 @@ div.coffeeShopBody {
     background-color: red;
     margin: 0 auto;
     display: flex;
-    flex-direction: row ;
+    flex-direction: row;
     flex-wrap: center;
-    justify-content:center;
+    justify-content: center;
 }
 
-div.coffeeShop_stock{
+div.coffeeShop_stock {
     width: 90%;
     height: 10vh;
     background-color: red;
     margin: 0 auto;
     display: flex;
-    flex-direction: row ;
+    flex-direction: row;
     flex-wrap: center;
-    justify-content:start;
+    justify-content: start;
 }
 
 div.stock_product_img {

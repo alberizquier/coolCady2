@@ -17,7 +17,7 @@
 
         <!--CAFETERIA CARD AREA-->
 
-        <div id="coffeeShopCardsArea" class="container" style="display:block;">
+        <div id="coffeeShopCardsArea" class="container" style="display:block; display: none;">
             <div id="coffeeShopsCards" class="cafes">
                 <div class="card">
                     <div class="black">
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <div id="coffeeShopProductArea" class="cafeteriasProductArea" style="display: none;">
+        <div id="coffeeShopProductArea" class="cafeteriasProductArea">
             <div class="white">
                 <div class="coffeeShopHeader" id="coffeeShopHeader">
                     <button onclick="btnRefreshAreasClick()">Back</button>
@@ -119,11 +119,11 @@
         <div class="caddyHeader">
             <img id="caddyBag" src="/client/assets/icons/caddyEmpty.png" alt="">
             <h1>Caddy</h1>
-            <h2>Your dishes list</h2>
         </div>
 
         <!--CADDY BODY ITEMS-->
         <div id="caddyBody" class="caddyBody">
+            <h2>Your dishes list</h2>
             <div class="container">
                 <h3 id="itemCounter">1</h3>
                 <h3 id="union">X</h3>
@@ -137,9 +137,13 @@
 
         <!--CADDY FOOTER AMOUNT-->
         <div class="caddyFooter">
-            <h2>Total:</h2>
-            <h2>VAT 10%:</h2>
-            <h2>TOTAL PRICE:</h2>
+            <div id="amount">
+                <h2>Total:</h2><input type="text" value="10,00€" id="total" disabled=true>
+                <hr>
+                <h2>VAT 10%:</h2><input type="text" value="1,00€" id="priceVat" disabled=true>
+                <hr>
+                <h2>TOTAL PRICE:</h2><input type="text" value="11,00€" id="priceTotal" disabled=true>
+            </div>
             <button>Order!</button>
         </div>
     </div>
