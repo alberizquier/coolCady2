@@ -11,143 +11,67 @@
 </head>
 
 <body>
-    <button id="btnRefreshAreas">RefreshAreas</button>
-    <div id="cafeteriasArea" class="container">
+    <div id="errorsArea"></div>
+    <div class="container">
 
+        <div class="coffeeShopsArea">
+            <!--CAFETERIA CARD AREA-->
 
-        <!--CAFETERIA CARD AREA-->
+            <div id="coffeeShopCardsArea" class="container">
+                <div id="coffeeShopsCards" class="cafes">
 
-        <div id="coffeeShopCardsArea" class="container" style="display:block; display: none;">
-            <div id="coffeeShopsCards" class="cafes">
-                <div class="card">
-                    <div class="black">
-                        <img src="/client/assets/cafetLogos/Cup&cake.png" alt=""><br>
-                        Cup & Cake
-                    </div>
                 </div>
-                <div class="card">
-                    <div class="black">
-                        <img src="/client/assets/cafetLogos/HolaCoffee.png" alt=""><br>
-                        Hola Coffee
+            </div>
+            <div id="coffeeShopProductArea" class="container cafeteriasProductArea">
+                <div class="white">
+                    <div class="coffeeShopHeader" id="coffeeShopHeader">
+                        <h2 id="coffeeShop_name">Cafeteria's Name</h2>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="black">
-                        <img src="/client/assets/cafetLogos/NomadCoffee.png" alt=""><br>
-                        Nomad
+                    <div class="coffeeShopBody" id="coffeeShopBody">
+
                     </div>
-                </div>
-                <div class="card">
-                    <div class="black">
-                        <img src="/client/assets/cafetLogos/SatansCoffeCorner.png" alt=""><br>
-                        Satan's Coffee Corner
+                    <div class="coffeeShopFooter" id="coffeeShopFooter">
+                        <h2>delivery time: 30 minutes!</h2>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="coffeeShopProductArea" class="cafeteriasProductArea">
-            <div class="white">
-                <div class="coffeeShopHeader" id="coffeeShopHeader">
-                    <button onclick="btnRefreshAreasClick()">Back</button>
-                    <h2 id="coffeeShop_name">Cafeteria's Name</h2>
-                </div>
-                <div class="coffeeShopBody" id="coffeeShopBody">
-                    <div class="container"><img src="/client/assets/dishes/cupAndcake/carrotCupCake.png"
-                            class="stock_product_img">
-                        <h2>Carrot CupCake</h2>
-                        <h4>Flour, sugar, baking soda, powder, salt, cinnamon, nutmeg, eggs, vanilla extract, milk,
-                            carrots
-                            and cream cheese</h4>
-                        <h4>3.00 €</h4><button>+</button>
-                    </div>
-                    <div class="container"><img src="/client/assets/dishes/cupAndcake/chocolateCupCake.png"
-                            class="stock_product_img">
-                        <h2>Chocolate CupCake</h2>
-                        <h4>Flour, sugar, baking soda, powder, salt, eggs, vanilla extract, milk, 90% chocolate for
-                            topping
-                        </h4>
-                        <h4>3.00 €</h4><button>+</button>
-                    </div>
-                    <div class="container"><img src="/client/assets/dishes/cupAndcake/lemonCupCake.png"
-                            class="stock_product_img">
-                        <h2>Lemon CupCake</h2>
-                        <h4>Flour, sugar, baking soda, powder, salt, eggs, vanilla extract, milk, lemon cream for
-                            topping
-                        </h4>
-                        <h4>3.00 €</h4><button>+</button>
-                    </div>
-                    <div class="container"><img src="/client/assets/dishes/cupAndcake/matchaCupCake.png"
-                            class="stock_product_img">
-                        <h2>Matcha CupCake</h2>
-                        <h4>Flour, sugar, baking soda, powder, salt, eggs, vanilla extract, milk, matcha for topping
-                        </h4>
-                        <h4>3.00 €</h4><button>+</button>
-                    </div>
-                    <div class="container"><img src="/client/assets/dishes/cupAndcake/pistachoCupCake.png"
-                            class="stock_product_img">
-                        <h2>Pistacho CupCake</h2>
-                        <h4>Flour, sugar, baking soda, powder, salt, eggs, vanilla extract, milk, pistacho cream for
-                            topping
-                        </h4>
-                        <h4>3.00 €</h4><button>+</button>
-                    </div>
-                    <div class="container"><img src="/client/assets/dishes/cupAndcake/remolachaCupCake.png"
-                            class="stock_product_img">
-                        <h2>Beet CupCake</h2>
-                        <h4>Flour, sugar, baking soda, powder, salt, eggs, vanilla extract, milk, beet cream for topping
-                        </h4>
-                        <h4>3.00 €</h4><button>+</button>
-                    </div>
-                    <div class="container"><img src="/client/assets/dishes/cupAndcake/handMadeCookies.png"
-                            class="stock_product_img">
-                        <h2>Hand made cookies</h2>
-                        <h4>Butter, sugar, brown sugar, eggs, vanilla extract, baking soda, salt, chocolate chips,
-                            walnuts
-                        </h4>
-                        <h4>2.00 €</h4><button>+</button>
-                    </div>
-                </div>
-                <div class="coffeeShopFooter" id="coffeeShopFooter">
-                    <h2>delivery time: 30 minutes!</h2>
+        <!--CADDY CARD AREA-->
+        <div class="caddyArea">
+            <!--CADDY HEADER TITTLE-->
+            <div class="caddyHeader">
+                <img id="caddyBag" src="/client/assets/icons/caddyEmpty.png" alt="">
+                <h1 id="mainCaddyTxt">Caddy</h1>
+            </div>
+
+            <!--CADDY BODY ITEMS-->
+            <div id="caddyBody" class="caddyBody">
+                <h2>Your dishes list</h2>
+                <div class="container">
+                    <h3 id="itemCounter">1</h3>
+                    <h3 id="union">X</h3>
+                    <img id="itemImage" src="/client/assets/dishes/cupAndcake/carrotCupCake.png" alt="">
+                    <input type="text" value="Carrot Cake" id="selectedItem" disabled=true>
+                    <input type="text" value="10,00" id="selectedPrice" disabled=true>
+                    <button id="removeOneItemFromCaddy">-</button>
+                    <button id="removeSelectionFromCaddy">X</button>
                 </div>
             </div>
+
+            <!--CADDY FOOTER AMOUNT-->
+            <div class="caddyFooter">
+                <div id="amount">
+                    <h2>Total:</h2><input type="text" id="taxBaseR" disabled=true>
+                    <hr>
+                    <h2>VAT 10%:</h2><input type="text" id="vatBaseR" disabled=true>
+                    <hr>
+                    <h2>TOTAL PRICE:</h2><input type="text" id="amountDue" disabled=true>
+                </div>
+                <button>Order!</button>
+            </div>
         </div>
+
     </div>
-    <!--CADDY CARD AREA-->
-    <div class="caddy">
-        <!--CADDY HEADER TITTLE-->
-        <div class="caddyHeader">
-            <img id="caddyBag" src="/client/assets/icons/caddyEmpty.png" alt="">
-            <h1>Caddy</h1>
-        </div>
-
-        <!--CADDY BODY ITEMS-->
-        <div id="caddyBody" class="caddyBody">
-            <h2>Your dishes list</h2>
-            <div class="container">
-                <h3 id="itemCounter">1</h3>
-                <h3 id="union">X</h3>
-                <img id="itemImage" src="/client/assets/dishes/cupAndcake/carrotCupCake.png" alt="">
-                <input type="text" value="Carrot Cake" id="selectedItem" disabled=true>
-                <input type="text" value="10,00" id="selectedPrice" disabled=true>
-                <button id="removeOneItemFromCaddy">-</button>
-                <button id="removeSelectionFromCaddy">X</button>
-            </div>
-        </div>
-
-        <!--CADDY FOOTER AMOUNT-->
-        <div class="caddyFooter">
-            <div id="amount">
-                <h2>Total:</h2><input type="text" id="taxBaseR" disabled=true>
-                <hr>
-                <h2>VAT 10%:</h2><input type="text" id="vatBaseR" disabled=true>
-                <hr>
-                <h2>TOTAL PRICE:</h2><input type="text" id="amountDue" disabled=true>
-            </div>
-            <button>Order!</button>
-        </div>
-    </div>
-
 
     <script type="module" src="./index.js"></script>
 </body>

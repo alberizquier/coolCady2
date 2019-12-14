@@ -82,9 +82,11 @@ class DocHeaderService extends CrudService {
                 docHeaderDTO.taxBaseR = 0;
                 docHeaderDTO.taxBaseS = 0;
                 docHeaderDTO.taxBaseN = 0;
+                docHeaderDTO.totalItems = 0;
 
                 //recorremos todos los detalles
                 for (let docDetailDTO of docDetailsDTO) {
+                    docHeaderDTO.totalItems += docDetailDTO.quantity;
                     //vamos acumulando en taxBaseX += docDetailDTO.price * docDetailDTO.quantity;
                     switch (docDetailDTO.vatKind) {
                         case "N":
@@ -112,44 +114,49 @@ class DocHeaderService extends CrudService {
         }
         return false;
     }
-    
+
     async addProduct(docHeaderId, docDetailDTO, errors) {
         //Busco el docHeader(caddy) ya existente
         let docHeaderDTO = await this.readOne(docHeaderId, errors);
         if (docHeaderDTO) {
             //añado el detail que me viene al caddy
+            //normalizo los campos
             docDetailDTO.docHeaderId = docHeaderId;
             if ("RSN".indexOf(DocDetailDTO.vatKind) < 0) {
                 DocDetailDTO.vatKind = "R";
             }
+            //busco el docDetail con el filtro carrito-producto 
             var docDetailsDTO = await this.services.docDetailsService.readAll({
                 docHeaderId: docHeaderId,
                 productId: docDetailDTO.productId
             }, errors);
+            //Si no ha habido fallos buscando detalles (carrito-producto) 
             if (docDetailsDTO) {
-                if(docDetailsDTO.length == 0){
+                //comprobar si el array de docDetails es de 0
+                if (docDetailsDTO.length == 0) {
+                    //Si no hay ninguno añadirlo al caddy
                     docDetailDTO = await this.services.docDetailsService.createOne(docDetailDTO, errors);
-                }
-                else{
+                } else {
+                    //Si ese producto ya exite en docDetails solo hemos de sumar +1 quantity
                     let quantity = docDetailDTO.quantity;
                     docDetailDTO = docDetailsDTO[0];
                     docDetailDTO.quantity += quantity;
                     docDetailDTO = await this.services.docDetailsService.updateOne(docDetailDTO, docDetailDTO.id, errors);
                 }
-                if(!docDetailDTO){
+                if (!docDetailDTO) {
                     return null;
                 }
-            }
-            //Actualizo el caddy
-            let result = await this.calculateTotals(docHeaderId, errors);
-            if (!result) {
-                return null;
-            }
-            //Devuelvo el caddy completo
-            if (docHeaderDTO) {
-                //leo el caddy completo
-                let fullDocHeaderDTO = await this.readFullOne(docHeaderDTO.id, errors);
-                return fullDocHeaderDTO;
+                //Actualizo los totales del caddy  
+                let result = await this.calculateTotals(docHeaderId, errors);
+                if (!result) {
+                    return null;
+                }
+                //Devuelvo el caddy completo
+                if (docHeaderDTO) {
+                    //leo el caddy completo
+                    let fullDocHeaderDTO = await this.readFullOne(docHeaderDTO.id, errors);
+                    return fullDocHeaderDTO;
+                }
             }
         }
         return null;
@@ -164,17 +171,18 @@ class DocHeaderService extends CrudService {
                 productId: docDetailDTO.productId
             }, errors);
             if (docDetailsDTO) {
-                for (let docDetailDTO of docDetailsDTO) {
-                    if (docDetailsDTO.quantity > 1) {
+                for (let item of docDetailsDTO) {
+                    let quantity = item.quantity - docDetailDTO.quantity;
+                    if (quantity > 0) {
                         //Disminuimos la cantidad y actualizamos
-                        docDetailDTO.quantity--;
-                        docDetailDTO = await this.services.docDetailsService.updateOne(docDetailDTO, docDetailDTO.id, errors);
+                        item.quantity = quantity;
+                        docDetailDTO = await this.services.docDetailsService.updateOne(item, item.id, errors);
                         if (!docDetailDTO) {
                             return null;
                         }
                     } else {
-                        //Como la quantity es 1 eliminamos el registro
-                        let deleted = await this.services.docDetailsService.deleteOne(docDetailDTO.id, errors);
+                        //Como la quantity es <= 0 eliminamos el registro
+                        let deleted = await this.services.docDetailsService.deleteOne(item.id, errors);
                         if (!deleted) {
                             return null;
                         }
@@ -190,6 +198,25 @@ class DocHeaderService extends CrudService {
                 let fullDocHeaderDTO = await this.readFullOne(caddyDTO.id, errors);
                 return fullDocHeaderDTO;
             }
+        }
+        return null;
+    }
+
+    async removeSelection(docDetailId, errors) {
+        //Busco el docDetailId(caddy) ya existente
+        let docDetailDTO = await this.services.docDetailsService.readOne(docDetailId, errors);
+        if (docDetailDTO) {
+            let deleted = await this.services.docDetailsService.deleteOne(docDetailId, errors);
+            if (!deleted) {
+                return null;
+            }
+            let result = await this.calculateTotals(docDetailDTO.docHeaderId, errors);
+            if (!result) {
+                return null;
+            }
+                //devuelvo el caddy completo
+                let fullDocHeaderDTO = await this.readFullOne(docDetailDTO.docHeaderId, errors);
+                return fullDocHeaderDTO;
         }
         return null;
     }

@@ -23,7 +23,8 @@ var DocHeaderSchema = new Schema({
     percentageBaseN : Number,
     percentageDiscount : Number,
     amountDue : Number,
-    amountPayed : Number
+    amountPayed : Number,
+    totalItems: Number
 });
 
 var DocHeaderDAO = mongoose.model('DocHeaders', DocHeaderSchema);

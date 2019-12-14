@@ -9,7 +9,7 @@ class DocHeadersAPI extends CrudAPI {
         app.post(`${uri}/caddy/:coffeeshopid`, this.newCaddy.bind(this));
         app.post(`${uri}/caddy/product/:docHeaderid`, this.addProduct.bind(this));
         app.delete(`${uri}/caddy/product/:docHeaderid`, this.removeProduct.bind(this));
-        app.get(`${uri}/caddy/:id`, this.getCaddy.bind(this));
+        app.delete(`${uri}/caddy/selection/:docDetailid`, this.removeSelection.bind(this));
     }
 
     async newCaddy(req, res) {
@@ -17,10 +17,9 @@ class DocHeadersAPI extends CrudAPI {
         const coffeeshopid = req.params.coffeeshopid;
         try {
             const errors = [];
-            const recordDTO = await this.crudService.newCaddy(coffeeshopid, errors);
-            if (recordDTO) {
-                console.log('Caddy',recordDTO );
-                this.sendData(res, recordDTO)
+            const caddyDTO = await this.crudService.newCaddy(coffeeshopid, errors);
+            if (caddyDTO) {
+                this.sendData(res, caddyDTO)
             } else {
                 this.sendError(res, this.ST_NotFound, "newCaddy()", errors);
             }
@@ -36,9 +35,9 @@ class DocHeadersAPI extends CrudAPI {
             var errors = [];
             var docDetailDTO = new DocDetailDTO();
             this.loadDTOFromBody(docDetailDTO, req.body);
-            const recordDTO = await this.crudService.addProduct(docHeaderid, docDetailDTO, errors);
-            if (recordDTO) {
-                this.sendData(res, recordDTO)
+            const caddyDTO = await this.crudService.addProduct(docHeaderid, docDetailDTO, errors);
+            if (caddyDTO) {
+                this.sendData(res, caddyDTO)
             } else {
                 this.sendError(res, this.ST_NotFound, "addProduct()", errors);
             }
@@ -54,9 +53,9 @@ class DocHeadersAPI extends CrudAPI {
             var errors = [];
             var docDetailDTO = new DocDetailDTO();
             this.loadDTOFromBody(docDetailDTO, req.body);
-            const recordDTO = await this.crudService.removeProduct(docHeaderid, docDetailDTO, errors);
-            if (recordDTO) {
-                this.sendData(res, recordDTO)
+            const caddyDTO = await this.crudService.removeProduct(docHeaderid, docDetailDTO, errors);
+            if (caddyDTO) {
+                this.sendData(res, caddyDTO)
             } else {
                 this.sendError(res, this.ST_NotFound, "removeProduct()", errors);
             }
@@ -65,13 +64,21 @@ class DocHeadersAPI extends CrudAPI {
         };
     }
 
-    async getCaddy(req, res) {
-        console.log(`API caddy getCaddy()`);
-
+    async removeSelection(req,res){
+        console.log(`API caddy removeSelection()`);
+        const docDetailid = req.params.docDetailid;
+        try {
+            var errors = [];
+            const caddyDTO = await this.crudService.removeSelection(docDetailid, errors);
+            if (caddyDTO) {
+                this.sendData(res, caddyDTO)
+            } else {
+                this.sendError(res, this.ST_NotFound, "removeSelection()", errors);
+            }
+        } catch (err) {
+            this.sendError(res, this.ST_InternalServerError, "removeSelection()", err.message);
+        };
     }
-
-
-
 }
 
 module.exports = DocHeadersAPI;

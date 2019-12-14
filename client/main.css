@@ -1,9 +1,9 @@
-div.cafes {
+div.coffeeShopsArea {
     width: 70%;
     float: left;
 }
 
-div.caddy {
+div.caddyArea {
     width: 28%;
     background-color: #252525;
     margin-left: 70%;
@@ -61,7 +61,7 @@ div.caddy h1 {
     font-size: 36pt;
 }
 
-div.caddy img#caddyBag {
+#caddyBag {
     width: 15%;
     float: right;
     margin-right: 10px;
@@ -101,6 +101,12 @@ div.caddyBody div.container img#itemImage {
     height: 50px;
     margin: 0 5px;
 }
+
+div.coffeeShopBody div.container img#itemImage {
+    height: 50px;
+    margin: 0 5px;
+}
+
 
 div.caddyBody div.container input#selectedItem {
     width: 40%;
@@ -176,7 +182,7 @@ div.white {
 
 div.cafeteriasProductArea {
     height: 95vh;
-    width: 69%;
+    width: 100%;
     background-image: url('/client/assets/dishes/cupAndcake/bgCupCakeBig.jpg');
     background-size: cover;
 }
@@ -222,6 +228,21 @@ div.coffeeShop_stock {
     justify-content: start;
 }
 
-div.stock_product_img {
-    height: 10vh;
+.productImage {
+    width: 110px;
+}
+
+.productName {
+    width: 20%;
+    margin-left: 15px;
+}
+
+.productIngredients {
+    width: 50%;
+    font-size: smaller;
+}
+
+.productPrice {
+    width: 10%;
+    text-align: end;
 }

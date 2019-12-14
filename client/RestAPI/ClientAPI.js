@@ -1,27 +1,3 @@
-function postAjax(url, data) {
-    // return a new promise. 
-    return new Promise(function (resolve, reject) {
-        // do the usual XHR stuff 
-        var req = new XMLHttpRequest();
-        req.open('post', url);
-        //NOW WE TELL THE SERVER WHAT FORMAT OF POST REQUEST WE ARE MAKING 
-        req.setRequestHeader('Content-Type', 'application/json');
-        req.onload = function () {
-            console.log('PostAjaxOnload()', req);
-            if (req.status == 200) {
-                resolve(req.response);
-            } else {
-                reject(Error(req.statusText));
-            }
-        };
-        // handle network errors 
-        req.onerror = function () {
-            reject(Error("Network Error"));
-        }; // make the request 
-        req.send(data);
-        //same thing if i hardcode like //req.send("limit=2"); 
-    });
-};
 
 export class ClientAPI {
     constructor(hostName, portNumber, apiPath) {
@@ -58,18 +34,14 @@ export class ClientAPI {
 
     async newCaddy(coffeeShopId, errors) {
         try {
-            var response = await postAjax(`${this.uri}/caddy/${coffeeShopId}`, null);
-            var dataJson = JSON.parse(response);
-            return dataJson;
-        } catch (error) {
-            errors.push(error.message);
-        }
-        return null;
-    }
-
-    async askCaddy(caddyId, errors) {
-        try {
-            var response = await fetch(`${this.uri}/docheaders/${caddyId}/full`);
+            var fetchParams = {
+                method: 'POST', 
+                body: null, 
+                headers:{
+                  'Content-Type': 'application/json'
+                }
+            };
+            var response = await fetch(`${this.uri}/caddy/${coffeeShopId}`, fetchParams);
             var dataJson = await response.json();
             return dataJson;
         } catch (error) {
@@ -90,8 +62,15 @@ export class ClientAPI {
                 title: "",
                 remarks: ""
             };
-            var response = await postAjax(`${this.uri}/caddy/product/${caddyId}`, JSON.stringify(data));
-            var dataJson = JSON.parse(response);
+            var fetchParams = {
+                method: 'POST', 
+                body: JSON.stringify(data), 
+                headers:{
+                  'Content-Type': 'application/json'
+                }
+            };
+            var response = await fetch(`${this.uri}/caddy/product/${caddyId}`, fetchParams);
+            var dataJson = await response.json();
             return dataJson;
         } catch (error) {
             errors.push(error.message);
@@ -99,13 +78,13 @@ export class ClientAPI {
         return null;
     }
 
-    async removeProduct(caddyId, productId,errors) {
+    async removeProduct(caddyId, productId,quantity,errors) {
         try {
             //object to be included in the body request before json.stringify();
             var data = {
                 docHeaderId: caddyId,
                 productId: productId,
-                quantity: 0,
+                quantity: quantity,
                 price: 0,
                 percentageDiscount: 0,
                 vatKind: "R",
@@ -129,24 +108,24 @@ export class ClientAPI {
         return null;
     }
 
-    // async deleteProductSelection(caddyId, productsId, quantity, price, errors) {
-    //     try {
-    //         var data = {
-    //             docHeaderId: caddyId,
-    //             productsId: [productId],
-    //             quantity: quantity,
-    //             price: price,
-    //             percentageDiscount: 0,
-    //             vatKind: "R",
-    //             title: "",
-    //             remarks: ""
-    //         };
-    //         var response = await postAjax(`${this.uri}/caddy/product/${caddyId}`, JSON.stringify(data));
-    //         var dataJson = JSON.parse(response);
-    //         return dataJson;
-    //     } catch (error) {
-    //         errors.push(error.message);
-    //     }
-    //     return null;
-    // }
+    async removeSelection (docDetailid, errors){
+        try {
+            //object to be included in the body request before json.stringify();
+            
+            var fetchParams = {
+                method: 'DELETE', 
+                body: null, 
+                headers:{
+                  'Content-Type': 'application/json'
+                }
+            };
+            //call to fetch(Endpoint, fetchParams);
+            var response = await fetch(`${this.uri}/caddy/selection/${docDetailid}`,fetchParams);
+            var dataJson = await response.json();
+            return dataJson;
+        } catch (error) {
+            errors.push(error.message);
+        }
+        return null;
+    }
 }

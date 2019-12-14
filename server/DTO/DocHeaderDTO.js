@@ -25,6 +25,7 @@ class DocHeaderDTO extends BaseDTO {
         this.percentageDiscount= 0;
         this.amountDue= 0;
         this.amountPayed= 0;
+        this.totalItems = 0;
     }
 }
 
