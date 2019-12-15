@@ -71,10 +71,24 @@ function displayCoffeeShops(coffeeShops) {
 }
 
 function displayCoffeeShop(coffeeShop) {
+    /*Template
+                <div id="coffeeShopProductArea" class="container cafeteriasProductArea">
+                    <div class="white">
+                            <div class="coffeeShopHeader" id="coffeeShopHeader">
+                            <h2 id="coffeeShop_name"></h2>
+                        </div>
+                    <div class="coffeeShopBody" id="coffeeShopBody">
+
+                    </div>
+                    <div class="coffeeShopFooter" id="coffeeShopFooter">
+                        <h2>delivery time: 30 minutes!</h2>
+                    </div>
+                    </div>
+                </div>
+    */
     hideNode('coffeeShopCardsArea', true);
     hideNode('coffeeShopProductArea', false);
 
-    //let divCoffeeShopNode = document.getElementById(coffeeShop.id);
     //Nodos HTML para display de campos
     let coffeeShop_nameNode = document.getElementById('coffeeShop_name');
     let coffeeShopBodyNode = document.getElementById('coffeeShopBody');

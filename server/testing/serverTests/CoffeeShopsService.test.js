@@ -3,6 +3,8 @@ class CoffeeShopContext {
         this.mongoose = require('mongoose');
         this.Services = require('../../Services/Services');
         this.CoffeeShopsService = require('../../Services/CoffeeShopsService');
+        this.StocksService = require('../../Services/StocksService');
+        this.ProductsService = require('../../Services/ProductsService');
 
         this.services = new this.Services();
         this.services.DAO.CoffeeShopDAO = require('../../DAO/CoffeeShopDAO');
@@ -10,6 +12,10 @@ class CoffeeShopContext {
         this.services.DAO.FullCoffeeShopDTO = require('../../DTO/FullCoffeeShopDTO');
 
         this.services.services.coffeeShopsService = new this.CoffeeShopsService(this.services);
+        this.services.services.stocksService = new this.StocksService(this.services);
+        this.services.services.productsService = new this.ProductsService(this.services);
+
+
 
         this.coffeeShopsService = this.services.services.coffeeShopsService;
     }

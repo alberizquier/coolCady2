@@ -6,8 +6,8 @@ class CrudAPI extends BaseAPI {
         this.crudService = crudService;
 
         //Aux endPoints
-        app.post(`${this.uri}/seed`, this.seed.bind(this)); //OK
-        app.post(`${this.uri}/unseed`, this.unseed.bind(this)); //OK
+        app.post(`${this.uri}/seed`, this.seed.bind(this)); 
+        app.post(`${this.uri}/unseed`, this.unseed.bind(this)); 
 
         app.get(`${this.uri}/model/full`, this.fullModel.bind(this));
         app.get(`${this.uri}/model/get`, this.model.bind(this));
@@ -17,13 +17,13 @@ class CrudAPI extends BaseAPI {
         app.get(`${this.uri}/model`, this.model.bind(this));
 
         //CRUD Endpoints
-        app.get(`${this.uri}/:id/full`, this.readFullOne.bind(this)); //OK
-        app.post(`${this.uri}/`, this.createOne.bind(this)); //OK
+        app.get(`${this.uri}/:id/full`, this.readFullOne.bind(this)); 
+        app.post(`${this.uri}/`, this.createOne.bind(this)); 
 
-        app.get(`${this.uri}/`, this.readAll.bind(this)); //OK
-        app.get(`${this.uri}/:id`, this.readOne.bind(this)); //OK
-        app.put(`${this.uri}/:id`, this.updateOne.bind(this)); //OK
-        app.delete(`${this.uri}/:id`, this.deleteOne.bind(this)); //OK
+        app.get(`${this.uri}/`, this.readAll.bind(this)); 
+        app.get(`${this.uri}/:id`, this.readOne.bind(this)); 
+        app.put(`${this.uri}/:id`, this.updateOne.bind(this)); 
+        app.delete(`${this.uri}/:id`, this.deleteOne.bind(this)); 
 
     }
 

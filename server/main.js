@@ -124,6 +124,12 @@ const docHeadersAPI = new DocHeadersAPI('/api',app,services.services)
 const docDetailsAPI = new DocDetailsAPI('/api',app,services.services)
 //#endregion
 
+async function appInit() {
+    console.log("Server listening on port 3000");
+    await app.listen(3000);
+
+}
+
 async function startApp() {
     try {
         app._router.stack.forEach(function (r) {
@@ -131,7 +137,12 @@ async function startApp() {
                 console.log(r.route.path)
             }
         })
-        const connection = await mongoose.connect('mongodb://localhost/coolCaddy', {
+        let dbName = 'coolCaddy';
+        if(process.argv.includes('test')){
+            dbName = 'coolCaddyTest';
+            console.log('Test Mode');
+        }
+        const connection = await mongoose.connect(`mongodb://localhost/${dbName}`, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
@@ -141,55 +152,4 @@ async function startApp() {
         console.log("Couldn't connect to Mongoose/coolCaddy");
     }
 }
-
-function showFullStockDTO(stockFullDTO) {
-    console.log(`StockFullDTO:`);
-    console.log(`    .product:${stockFullDTO.product.displayName}`);
-    console.log(`    .CoffeeShop:${stockFullDTO.coffeeShop.displayName}`);
-    console.log(`        .Quantity:${stockFullDTO.quantity}`);
-    console.log(`        .Price Sell:${stockFullDTO.priceSell}`);
-
-}
-
-function showFullProductDTO(productFullDTO) {
-    console.log(`productFullDTO`);
-    console.log(`  .name= ${productFullDTO.name}`);
-    console.log(`  .kind= ${productFullDTO.kind}`);
-    console.log(`  .subKind= ${productFullDTO.subKind}`);
-    console.log(`  .ingredient= ${productFullDTO.ingredient}`);
-    console.log(`  .priceCost= ${productFullDTO.priceCost}`);
-    console.log(`  .vatKind= ${productFullDTO.vatKind}`);
-    console.log(`  .remarks= ${productFullDTO.remarks}`);
-    console.log(`  .pictureURL= ${productFullDTO.pictureURL}`);
-    console.log(`  .vat.percentage = ${productFullDTO.vat.percentage}`);
-    console.log(`  .vat.displayName = ${productFullDTO.vat.displayName}`);
-
-    for (let fullStock of productFullDTO.stocks) {
-        console.log(`    .CoffeeShop:${fullStock.coffeeShop.displayName}`);
-        console.log(`        .Quantity:${fullStock.quantity}`);
-        console.log(`        .Price Sell:${fullStock.priceSell}`);
-    }
-
-}
-
-function showFullCoffeeShopDTO(coffeeShopFullDTO) {
-    console.log(`coffeeShopFullDTO`);
-    console.log(`  .name= ${coffeeShopFullDTO.name}`);
-    console.log(`  .displayName= ${coffeeShopFullDTO.displayName}`);
-    console.log(`  .address= ${coffeeShopFullDTO.address}`);
-    console.log(`  .pictureURL= ${coffeeShopFullDTO.pictureURL}`);
-    console.log(`  .description= ${coffeeShopFullDTO.description}`);
-    for (let fullStock of coffeeShopFullDTO.stocks) {
-        console.log(`    .Product:${fullStock.product.displayName}`);
-        console.log(`        .Quantity:${fullStock.quantity}`);
-        console.log(`        .Price Sell:${fullStock.priceSell}`);
-    }
-}
-
-async function appInit() {
-    console.log("Server listening on port 3000");
-    await app.listen(3000);
-
-}
-
 startApp();
