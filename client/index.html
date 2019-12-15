@@ -16,16 +16,18 @@
 
         <div class="coffeeShopsArea">
             <!--CAFETERIA CARD AREA-->
-
+            <!--4 CoffeeShops area-->
             <div id="coffeeShopCardsArea" class="container">
                 <div id="coffeeShopsCards" class="cafes">
 
                 </div>
             </div>
+
+            <!--1 CoffeeShop with his products-->
             <div id="coffeeShopProductArea" class="container cafeteriasProductArea">
                 <div class="white">
                     <div class="coffeeShopHeader" id="coffeeShopHeader">
-                        <h2 id="coffeeShop_name">Cafeteria's Name</h2>
+                        <h2 id="coffeeShop_name"></h2>
                     </div>
                     <div class="coffeeShopBody" id="coffeeShopBody">
 
@@ -36,41 +38,45 @@
                 </div>
             </div>
         </div>
-        <!--CADDY CARD AREA-->
-        <div class="caddyArea">
-            <!--CADDY HEADER TITTLE-->
-            <div class="caddyHeader">
-                <img id="caddyBag" src="/client/assets/icons/caddyEmpty.png" alt="">
-                <h1 id="mainCaddyTxt">Caddy</h1>
-            </div>
 
-            <!--CADDY BODY ITEMS-->
-            <div id="caddyBody" class="caddyBody">
-                <h2>Your dishes list</h2>
-                <div class="container">
-                    <h3 id="itemCounter">1</h3>
-                    <h3 id="union">X</h3>
-                    <img id="itemImage" src="/client/assets/dishes/cupAndcake/carrotCupCake.png" alt="">
-                    <input type="text" value="Carrot Cake" id="selectedItem" disabled=true>
-                    <input type="text" value="10,00" id="selectedPrice" disabled=true>
-                    <button id="removeOneItemFromCaddy">-</button>
-                    <button id="removeSelectionFromCaddy">X</button>
+        <div class="sellingArea">
+            <!--CADDY CARD AREA-->
+            <div id="caddyArea" class="caddyArea">
+                <!--CADDY HEADER TITTLE-->
+                <div class="caddyHeader">
+                    <img id="caddyBag" src="/client/assets/icons/caddyEmpty.png" alt="">
+                    <h1 id="mainCaddyTxt">Caddy</h1>
+                </div>
+
+                <!--CADDY BODY ITEMS-->
+                <div id="caddyBody" class="caddyBody">
+                    <h2>Your dishes list</h2>
+                    <div class="container">
+                       
+                    </div>
+                </div>
+
+                <!--CADDY FOOTER AMOUNT-->
+                <div class="caddyFooter">
+                    <div id="amount">
+                        <h2>Total:</h2><input type="text" id="taxBaseR" disabled=true>
+                        <hr>
+                        <h2>VAT 10%:</h2><input type="text" id="vatBaseR" disabled=true>
+                        <hr>
+                        <h2>TOTAL PRICE:</h2><input type="text" id="amountDue" disabled=true>
+                    </div>
+                    <button id="btnOrder">Order!</button>
                 </div>
             </div>
 
-            <!--CADDY FOOTER AMOUNT-->
-            <div class="caddyFooter">
-                <div id="amount">
-                    <h2>Total:</h2><input type="text" id="taxBaseR" disabled=true>
-                    <hr>
-                    <h2>VAT 10%:</h2><input type="text" id="vatBaseR" disabled=true>
-                    <hr>
-                    <h2>TOTAL PRICE:</h2><input type="text" id="amountDue" disabled=true>
-                </div>
-                <button>Order!</button>
+            <!--Order Card Area-->
+            <div id="orderArea" class="orderArea">
+                <h1>Order completed</h1>
+                <h2 id="orderAreaBody">Your order will be soon at your house</h2>
+                    <h3 id="btnBackToCaddy">Keep buying</h3>
             </div>
+
         </div>
-
     </div>
 
     <script type="module" src="./index.js"></script>

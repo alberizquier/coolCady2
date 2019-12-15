@@ -9,12 +9,40 @@ import {
 
 var currentCaddy = null;
 
+
+//#region Errors
 function displayErrors(errors) {
     let errorsAreaNode = document.getElementById('errorsArea');
     errorsAreaNode.innerHTML = JSON.stringify(errors);
 }
 
+//#endregion
+
+//#region AuxFuntions
+function hideNode(nameNode, hidden) {
+    let node = document.getElementById(nameNode);
+    if (hidden) {
+        node.style.display = "none";
+    } else {
+        node.style.display = "block";
+    }
+}
+
+//#endregion
+
+//#region DisplayModels
 function displayCoffeeShops(coffeeShops) {
+    /*Template
+     <div class="card">
+             <div class="black">
+                 <img src="/client/assets/dishes/cupAndcake/bgCupCake.jpg" alt=""><br>
+                 Cup & Cake
+             </div>
+         </div>
+     */
+    hideNode('coffeeShopCardsArea', false);
+    hideNode('coffeeShopProductArea', true);
+
     let coffeeShopsCardsNode = document.getElementById('coffeeShopsCards');
     coffeeShopsCardsNode.innerHTML = '';
     for (let coffeeShop of coffeeShops) {
@@ -37,20 +65,16 @@ function displayCoffeeShops(coffeeShops) {
         divCardNode.addEventListener('click', () => {
             btnCoffeeShopClick(coffeeShop.id);
         })
-        /*
-        <div class="card">
-                <div class="black">
-                    <img src="/client/assets/dishes/cupAndcake/bgCupCake.jpg" alt=""><br>
-                    Cup & Cake
-                </div>
-            </div>
-        */
+
 
     }
 }
 
 function displayCoffeeShop(coffeeShop) {
-    let divCoffeeShopNode = document.getElementById(coffeeShop.id);
+    hideNode('coffeeShopCardsArea', true);
+    hideNode('coffeeShopProductArea', false);
+
+    //let divCoffeeShopNode = document.getElementById(coffeeShop.id);
     //Nodos HTML para display de campos
     let coffeeShop_nameNode = document.getElementById('coffeeShop_name');
     let coffeeShopBodyNode = document.getElementById('coffeeShopBody');
@@ -94,51 +118,16 @@ function displayCoffeeShop(coffeeShop) {
 
 }
 
-function displayCaddy(caddy) {
-    /*Template
-      <div class="caddy">
-            <!--CADDY HEADER TITTLE-->
-            <div class="caddyHeader">
-                <img id="caddyBag" src="/client/assets/icons/caddyEmpty.png" alt="">
-                <h1>Caddy</h1>
-            </div>
-
-            <!--CADDY BODY ITEMS-->
-            <div id="caddyBody" class="caddyBody">
-                <h2>Your dishes list</h2>
-                <div class="container">
-                    <h3 id="itemCounter">1</h3>
-                    <h3 id="union">X</h3>
-                    <img id="itemImage" src="/client/assets/dishes/cupAndcake/carrotCupCake.png" alt="">
-                    <input type="text" value="Carrot Cake" id="selectedItem" disabled=true>
-                    <input type="text" value="10,00" id="selectedPrice" disabled=true>
-                    <button id="removeOneItemFromCaddy">-</button>
-                    <button id="removeSelectionFromCaddy">X</button>
+function displayCaddyHeader(caddy) {
+    /* Template
+                <!--CADDY HEADER TITTLE-->
+                    <div class="caddyHeader">
+                    <img id="caddyBag" src="/client/assets/icons/caddyEmpty.png" alt="">
+                    <h1>Caddy</h1>
                 </div>
-            </div>
-
-            <!--CADDY FOOTER AMOUNT-->
-            <div class="caddyFooter">
-                <div id="amount">
-                    <h2>Total:</h2><input type="text" id="taxBaseR" disabled=true>
-                    <hr>
-                    <h2>VAT 10%:</h2><input type="text" id="vatBaseR" disabled=true>
-                    <hr>
-                    <h2>TOTAL PRICE:</h2><input type="text" id="amountDue" disabled=true>
-                </div>
-                <button>Order!</button>
-            </div>
-        </div>
-
     */
 
-    currentCaddy = caddy;
     let caddyBagNode = document.getElementById('caddyBag');
-    let caddyBodyNode = document.getElementById('caddyBody');
-    let taxBaseRNode = document.getElementById('taxBaseR');
-    let vatBaseRNode = document.getElementById('vatBaseR');
-    let amountDueNode = document.getElementById('amountDue');
-
     let totalItemsId = 'Empty';
     switch (caddy.totalItems) {
         case 0:
@@ -161,84 +150,161 @@ function displayCaddy(caddy) {
             break;
     }
     caddyBagNode.setAttribute('src', `/client/assets/icons/caddy${totalItemsId}.png`)
+}
+
+function displayCaddyFooter(caddy) {
+    /*Template
+                 <!--CADDY FOOTER AMOUNT-->
+                    <div class="caddyFooter">
+                        <div id="amount">
+                        <h2>Total:</h2><input type="text" id="taxBaseR" disabled=true>
+                        <hr>
+                        <h2>VAT 10%:</h2><input type="text" id="vatBaseR" disabled=true>
+                        <hr>
+                        <h2>TOTAL PRICE:</h2><input type="text" id="amountDue" disabled=true>
+                         </div>
+                        <button>Order!</button>
+                    </div>
+    */
+
+    let taxBaseRNode = document.getElementById('taxBaseR');
+    let vatBaseRNode = document.getElementById('vatBaseR');
+    let amountDueNode = document.getElementById('amountDue');
     taxBaseRNode.value = `${caddy.taxBaseR.toFixed(2)} €`;
     amountDueNode.value = `${caddy.amountDue.toFixed(2)} €`;
 
     //el amount del vat no viene calculado! Se ha de calcular dinamicamente
     let vatBaseR = caddy.taxBaseR * caddy.percentageBaseR;
-
     vatBaseRNode.value = `${vatBaseR.toFixed(2)} €`;
-
-    caddyBodyNode.innerHTML = '<h2>Your dishes list</h2>';
-    for (let docDetail of caddy.docDetails) {
-        /* Template
-                    <div class="container">
-                        <h3 id="itemCounter">1</h3>
-                        <h3 id="union">X</h3>
-                        <img id="itemImage" src="/client/assets/dishes/cupAndcake/carrotCupCake.png" alt="">
-                        <input type="text" value="Carrot Cake" id="selectedItem" disabled="true">
-                        <input type="text" value="10,00" id="selectedPrice" disabled="true">
-                        <button id="removeOneItemFromCaddy">-</button>
-                        <button id="removeSelectionFromCaddy">X</button>
-                    </div>
-        */
-
-        let containerNode = document.createElement('div');
-        let itemCounterNode = document.createElement('h3');
-        let unionNode = document.createElement('h3');
-        let imgNode = document.createElement('img');
-        let inputTextNode = document.createElement('input');
-        let inputPriceNode = document.createElement('input');
-        let buttonAddOneNode = document.createElement('button');
-        let buttonRemoveOneNode = document.createElement('button');
-        let buttonRemoveSelectionNode = document.createElement('button');
-
-        caddyBodyNode.appendChild(containerNode);
-        containerNode.appendChild(itemCounterNode);
-        containerNode.appendChild(unionNode);
-        containerNode.appendChild(imgNode);
-        containerNode.appendChild(inputTextNode);
-        containerNode.appendChild(inputPriceNode);
-        containerNode.appendChild(buttonAddOneNode);
-        containerNode.appendChild(buttonRemoveOneNode);
-        containerNode.appendChild(buttonRemoveSelectionNode);
-
-        containerNode.setAttribute('class', 'container');
-        itemCounterNode.setAttribute('id', 'itemCounter');
-        unionNode.setAttribute('id', 'union');
-        imgNode.setAttribute('id', 'itemImage');
-        imgNode.setAttribute('src', `/client/assets/dishes${docDetail.product.pictureURL}`);
-        inputTextNode.setAttribute('id', 'selectedItem');
-        inputTextNode.setAttribute('disabled', true);
-        inputPriceNode.setAttribute('id', 'selectedPrice');
-        inputPriceNode.setAttribute('disabled', true);
-
-        buttonAddOneNode.setAttribute('id', 'addOneItemFromCaddy');
-        buttonAddOneNode.addEventListener('click', async () => {
-            await addToCaddy(docDetail.productId, 1, docDetail.price);
-        })
-        buttonRemoveOneNode.setAttribute('id', 'removeOneItemFromCaddy');
-        buttonRemoveOneNode.addEventListener('click', async () => {
-            await removeFromCaddy(docDetail.productId, 1);
-        })
-        buttonRemoveSelectionNode.setAttribute('id', 'removeSelectionFromCaddy');
-        buttonRemoveSelectionNode.addEventListener('click', async () => {
-            await removeSelectionFromCaddy(docDetail.id);
-        })
-        buttonAddOneNode.textContent = '+';
-        buttonRemoveOneNode.textContent = '-';
-        buttonRemoveSelectionNode.textContent = 'X';
-        itemCounterNode.textContent = docDetail.quantity;
-        unionNode.textContent = "X";
-        inputTextNode.value = docDetail.product.displayName;
-        inputPriceNode.value = docDetail.price;
-    }
 }
 
-function btnRefreshAreasClick() {
-    hideNode('coffeeShopCardsArea', false);
-    hideNode('coffeeShopProductArea', true);
-    refreshCoffeeShops(displayCoffeeShops.bind(this), displayErrors.bind(this));
+function displayCaddyDetails(caddyBodyNode, docDetail) {
+    /* Template
+                      <div class="container">
+                          <h3 id="itemCounter">1</h3>
+                          <h3 id="union">X</h3>
+                          <img id="itemImage" src="/client/assets/dishes/cupAndcake/carrotCupCake.png" alt="">
+                          <input type="text" value="Carrot Cake" id="selectedItem" disabled="true">
+                          <input type="text" value="10,00" id="selectedPrice" disabled="true">
+                          <button id="removeOneItemFromCaddy">-</button>
+                          <button id="removeSelectionFromCaddy">X</button>
+                      </div>
+    */
+
+    let containerNode = document.createElement('div');
+    let itemCounterNode = document.createElement('h3');
+    let unionNode = document.createElement('h3');
+    let imgNode = document.createElement('img');
+    let inputTextNode = document.createElement('input');
+    let inputPriceNode = document.createElement('input');
+    let buttonAddOneNode = document.createElement('button');
+    let buttonRemoveOneNode = document.createElement('button');
+    let buttonRemoveSelectionNode = document.createElement('button');
+
+    caddyBodyNode.appendChild(containerNode);
+    containerNode.appendChild(itemCounterNode);
+    containerNode.appendChild(unionNode);
+    containerNode.appendChild(imgNode);
+    containerNode.appendChild(inputTextNode);
+    containerNode.appendChild(inputPriceNode);
+    containerNode.appendChild(buttonAddOneNode);
+    containerNode.appendChild(buttonRemoveOneNode);
+    containerNode.appendChild(buttonRemoveSelectionNode);
+
+    containerNode.setAttribute('class', 'container');
+    itemCounterNode.setAttribute('id', 'itemCounter');
+    unionNode.setAttribute('id', 'union');
+    imgNode.setAttribute('id', 'itemImage');
+    imgNode.setAttribute('src', `/client/assets/dishes${docDetail.product.pictureURL}`);
+    inputTextNode.setAttribute('id', 'selectedItem');
+    inputTextNode.setAttribute('disabled', true);
+    inputPriceNode.setAttribute('id', 'selectedPrice');
+    inputPriceNode.setAttribute('disabled', true);
+
+    buttonAddOneNode.setAttribute('id', 'addOneItemFromCaddy');
+    buttonAddOneNode.addEventListener('click', async () => {
+        await addToCaddy(docDetail.productId, 1, docDetail.price);
+    })
+    buttonRemoveOneNode.setAttribute('id', 'removeOneItemFromCaddy');
+    buttonRemoveOneNode.addEventListener('click', async () => {
+        await removeFromCaddy(docDetail.productId, 1);
+    })
+    buttonRemoveSelectionNode.setAttribute('id', 'removeSelectionFromCaddy');
+    buttonRemoveSelectionNode.addEventListener('click', async () => {
+        await removeSelectionFromCaddy(docDetail.id);
+    })
+    buttonAddOneNode.textContent = '+';
+    buttonRemoveOneNode.textContent = '-';
+    buttonRemoveSelectionNode.textContent = 'X';
+    itemCounterNode.textContent = docDetail.quantity;
+    unionNode.textContent = "X";
+    inputTextNode.value = docDetail.product.displayName;
+    inputPriceNode.value = docDetail.price;
+}
+
+
+function displayCaddy(caddy) {
+    /*Template
+      <div class="caddy">
+            
+            <!--CADDY BODY ITEMS-->
+            <div id="caddyBody" class="caddyBody">
+                <h2>Your dishes list</h2>
+                <div class="container">
+                    <h3 id="itemCounter">1</h3>
+                    <h3 id="union">X</h3>
+                    <img id="itemImage" src="/client/assets/dishes/cupAndcake/carrotCupCake.png" alt="">
+                    <input type="text" value="Carrot Cake" id="selectedItem" disabled=true>
+                    <input type="text" value="10,00" id="selectedPrice" disabled=true>
+                    <button id="removeOneItemFromCaddy">-</button>
+                    <button id="removeSelectionFromCaddy">X</button>
+                </div>
+            </div>
+        </div>
+    */
+
+    currentCaddy = caddy;
+
+    hideNode('caddyArea', false);
+    hideNode('orderArea', true);
+
+    displayCaddyHeader(caddy);
+
+    let caddyBodyNode = document.getElementById('caddyBody');
+    caddyBodyNode.innerHTML = '<h2>Your dishes list</h2>';
+    for (let docDetail of caddy.docDetails) {
+        displayCaddyDetails(caddyBodyNode, docDetail);
+    }
+    displayCaddyFooter(caddy);
+}
+
+function displayOrder(order) {
+    hideNode('caddyArea', true);
+    hideNode('orderArea', false);
+}
+
+//#endregion
+
+//#region Funcionalities of main.js
+
+async function getCoffeeShops() {
+    await refreshCoffeeShops(displayCoffeeShops.bind(this), displayErrors.bind(this));
+}
+
+async function getCoffeeShop(coffeeShopId) {
+    await refreshCoffeeShop(coffeeShopId, displayCoffeeShop.bind(this), displayErrors.bind(this));
+}
+
+async function clearCaddy(coffeeShopId) {
+    await newCaddy(coffeeShopId, displayCaddy.bind(this), displayErrors.bind(this));
+}
+
+async function getCaddy() {
+    await askCaddy(currentCaddy.id, displayCaddy.bind(this), displayErrors.bind(this));
+}
+
+async function getOrder() {
+    await askOrder(currentCaddy.id, displayOrder.bind(this), displayErrors.bind(this));
 }
 
 async function addToCaddy(productId, quantity, price) {
@@ -252,26 +318,45 @@ async function removeFromCaddy(productId, quantity) {
 async function removeSelectionFromCaddy(docDetailid) {
     await removeSelection(docDetailid, displayCaddy.bind(this), displayErrors.bind(this));
 }
+//#endregion
 
-function hideNode(nameNode, hidden) {
-    let node = document.getElementById(nameNode);
-    if (hidden) {
-        node.style.display = "none";
-    } else {
-        node.style.display = "block";
-    }
+
+//#region ClickEvents
+function btnRefreshAreasClick() {
+    getCoffeeShops();
 }
-
 
 function btnCoffeeShopClick(id) {
-    hideNode('coffeeShopCardsArea', true);
-    hideNode('coffeeShopProductArea', false);
-    refreshCoffeeShop(id, displayCoffeeShop.bind(this), displayErrors.bind(this));
-    newCaddy(id, displayCaddy.bind(this), displayErrors.bind(this));
+    getCoffeeShop(id);
+    clearCaddy(id);
 }
 
-let btnRefreshAreasNode = document.getElementById('mainCaddyTxt');
-btnRefreshAreasNode.addEventListener('click', btnRefreshAreasClick);
+function btnOrderClick(caddyId) {
+    hideNode('caddyArea', true);
+    hideNode('orderArea', false);
+}
+
+function backToCaddyClick(caddyId) {
+    hideNode('caddyArea', false);
+    hideNode('orderArea', true);
+}
+
+//#endregion
 
 
-document.body.onload = btnRefreshAreasClick;
+//#region InitApp
+(function initApp() {
+    hideNode('coffeeShopCardsArea', false);
+    hideNode('coffeeShopProductArea', true);
+
+    hideNode('caddyArea', false);
+    hideNode('orderArea', true);
+
+    let btnRefreshAreasNode = document.getElementById('mainCaddyTxt');
+    btnRefreshAreasNode.addEventListener('click', btnRefreshAreasClick);
+    let btnOrderNode = document.getElementById('btnOrder');
+    btnOrderNode.addEventListener('click', btnOrderClick);
+    let btnBackToCaddyNode = document.getElementById('btnBackToCaddy');
+    btnBackToCaddyNode.addEventListener('click', backToCaddyClick);
+    document.body.onload = btnRefreshAreasClick;
+})();

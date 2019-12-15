@@ -246,3 +246,7 @@ div.coffeeShop_stock {
     width: 10%;
     text-align: end;
 }
+
+#btnBackToCaddy{
+    width: 100%;
+}
