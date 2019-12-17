@@ -5,7 +5,8 @@ var CoffeeShopSchema = new Schema({
     name: String,
     displayName: String,
     address: String,
-    pictureURL: String,
+    backgroundPictureURL: String,
+    logoURL:String,
     description: String
 });
 

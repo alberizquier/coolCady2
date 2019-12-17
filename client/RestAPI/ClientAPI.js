@@ -50,6 +50,24 @@ export class ClientAPI {
         return null;
     }
 
+    async closeCaddy(caddyId, errors){
+        try {
+            var fetchParams = {
+                method: 'POST', 
+                body: null, 
+                headers:{
+                  'Content-Type': 'application/json'
+                }
+            };
+            var response = await fetch(`${this.uri}/caddy/${caddyId}/close`, fetchParams);
+            var dataJson = await response.json();
+            return dataJson;
+        } catch (error) {
+            errors.push(error.message);
+        }
+        return null;
+    }
+
     async addProduct(caddyId, productId, quantity, price, errors) {
         try {
             var data = {

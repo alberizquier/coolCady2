@@ -8,7 +8,8 @@ class CoffeeShopDTO extends BaseDTO {
         this.name = "";
         this.displayName = "";
         this.address = "";
-        this.pictureURL = "";
+        this.backgroundPictureURL = "";
+        this.logoURL="";
         this.description = "";
     }
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Maven+Pro&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./mainG.css">
     <title>Cool Caddy</title>
 </head>
 
@@ -24,7 +24,7 @@
             </div>
 
             <!--1 CoffeeShop with his products-->
-            <div id="coffeeShopProductArea" class="container cafeteriasProductArea">
+            <div id="coffeeShopProductArea" class="container coffeeShopProductArea">
                 <div class="white">
                     <div class="coffeeShopHeader" id="coffeeShopHeader">
                         <h2 id="coffeeShop_name"></h2>
@@ -44,15 +44,16 @@
             <div id="caddyArea" class="caddyArea">
                 <!--CADDY HEADER TITTLE-->
                 <div class="caddyHeader">
+                    <span id="mainCaddyTxt">Caddy</span>
                     <img id="caddyBag" src="/client/assets/icons/caddyEmpty.png" alt="">
-                    <h1 id="mainCaddyTxt">Caddy</h1>
                 </div>
+
 
                 <!--CADDY BODY ITEMS-->
                 <div id="caddyBody" class="caddyBody">
                     <h2>Your dishes list</h2>
                     <div class="container">
-                       
+
                     </div>
                 </div>
 
@@ -69,14 +70,17 @@
                 </div>
             </div>
 
+
             <!--Order Card Area-->
             <div id="orderArea" class="orderArea">
                 <h1>Order completed</h1>
                 <h2 id="orderAreaBody">Your order will be soon at your house</h2>
-                    <h3 id="btnBackToCaddy">Keep buying</h3>
-            </div>
+                <h2>Amount Due:<span id="orderAmountDue" ></h2>
+                <button id="btnBackToCaddy">Keep buying</button>
 
+            </div>
         </div>
+
     </div>
 
     <script type="module" src="./index.js"></script>

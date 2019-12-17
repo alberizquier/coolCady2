@@ -100,6 +100,7 @@ class Seed {
                 coffeeShopDAO.displayName = coffeeShop.name;
                 coffeeShopDAO.address = "";
                 coffeeShopDAO.pictureURL = coffeeShop.image;
+                coffeeShopDAO.logoURL = coffeeShop.logoURL;
                 coffeeShopDAO.description = coffeeShop.description;
                 if (create) {
                     coffeeShopDAO = await CoffeeShopDAO.create(coffeeShopDAO);

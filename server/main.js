@@ -134,7 +134,7 @@ async function startApp() {
     try {
         app._router.stack.forEach(function (r) {
             if (r.route && r.route.path) {
-                console.log(r.route.path)
+                console.log(`${r.route.stack[0].method}:${r.route.path}`);
             }
         })
         let dbName = 'coolCaddy';

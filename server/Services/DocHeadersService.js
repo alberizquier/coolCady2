@@ -66,6 +66,19 @@ class DocHeaderService extends CrudService {
         return null;
     }
 
+    async closeCaddy(caddyId, errors) {
+        let docHeaderDTO = await this.readOne(caddyId, errors);
+        if (docHeaderDTO) {
+            docHeaderDTO.docState = "close";
+            docHeaderDTO = await this.updateOne(docHeaderDTO, docHeaderDTO.id, errors);
+            if (docHeaderDTO) {
+                let fullDocHeaderDTO = await this.readFullOne(docHeaderDTO.id, errors);
+                return fullDocHeaderDTO;
+            }
+        }
+        return null;
+    }
+
     async calculateTotals(docHeaderId, errors) {
         //localizamos el headerDTO
         let docHeaderDTO = await this.readOne(docHeaderId, errors);
@@ -214,9 +227,9 @@ class DocHeaderService extends CrudService {
             if (!result) {
                 return null;
             }
-                //devuelvo el caddy completo
-                let fullDocHeaderDTO = await this.readFullOne(docDetailDTO.docHeaderId, errors);
-                return fullDocHeaderDTO;
+            //devuelvo el caddy completo
+            let fullDocHeaderDTO = await this.readFullOne(docDetailDTO.docHeaderId, errors);
+            return fullDocHeaderDTO;
         }
         return null;
     }

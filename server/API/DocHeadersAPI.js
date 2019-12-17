@@ -7,6 +7,7 @@ class DocHeadersAPI extends CrudAPI {
     constructor(uri, app, services) {
         super(uri + '/docheaders', app, "DocHeaders", services.docHeadersService);
         app.post(`${uri}/caddy/:coffeeshopid`, this.newCaddy.bind(this));
+        app.post(`${uri}/caddy/:caddyId/close`, this.closeCaddy.bind(this));
         app.post(`${uri}/caddy/product/:docHeaderid`, this.addProduct.bind(this));
         app.delete(`${uri}/caddy/product/:docHeaderid`, this.removeProduct.bind(this));
         app.delete(`${uri}/caddy/selection/:docDetailid`, this.removeSelection.bind(this));
@@ -25,6 +26,22 @@ class DocHeadersAPI extends CrudAPI {
             }
         } catch (err) {
             this.sendError(res, this.ST_InternalServerError, "newCaddy()", err.message);
+        };
+    }
+
+    async closeCaddy(req, res) {
+        console.log(`API caddy closeCaddy()`);
+        const caddyId = req.params.caddyId;
+        try {
+            const errors = [];
+            const orderDTO = await this.crudService.closeCaddy(caddyId, errors);
+            if (orderDTO) {
+                this.sendData(res, orderDTO)
+            } else {
+                this.sendError(res, this.ST_NotFound, "closeCaddy()", errors);
+            }
+        } catch (err) {
+            this.sendError(res, this.ST_InternalServerError, "closeCaddy()", err.message);
         };
     }
 

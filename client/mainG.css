@@ -1,9 +1,9 @@
-div.coffeeShopsArea {
+div.cafes {
     width: 70%;
     float: left;
 }
 
-div.caddyArea {
+div.caddy {
     width: 28%;
     background-color: #252525;
     margin-left: 70%;
@@ -12,6 +12,7 @@ div.caddyArea {
 div.cafes div.card {
     width: 50%;
     height: 49vh;
+    background-image: url('/client/assets/cafetLogos/bgCupAndCake.jpg');
     background-position: center;
     background-size: cover;
     float: left;
@@ -52,7 +53,7 @@ div.caddy {
     padding: 15px;
     height: 95vh;
     font-family: 'Maven Pro', sans-serif;
-    background-image: url('/client/assets/bgCaddy.png');
+    background-image: url(./assets/bgCaddy.png);
 }
 
 div.caddyHeader span {
@@ -61,14 +62,10 @@ div.caddyHeader span {
     width: 84%;
 }
 
-#caddyBag {
-    width: 15%;
+div.caddyHeader img#caddyBag {
+    width: 55px;
     float: right;
     margin-right: 10px;
-}
-
-.caddyHeader{
-    display: flex;
 }
 
 div.caddyBody {
@@ -106,12 +103,6 @@ div.caddyBody div.container img#itemImage {
     margin: 0 5px;
 }
 
-div.coffeeShopBody div.container img#itemImage {
-    height: 50px;
-    margin: 0 5px;
-}
-
-
 div.caddyBody div.container input#selectedItem {
     width: 40%;
     height: 48px;
@@ -140,7 +131,7 @@ div.caddyBody div.container input#selectedPrice {
 div.caddyBody div.container button {
     height: 30px;
     width: 30px;
-    background-image: url('/client/assets/bgCaddy.png');
+    background-image: url(./assets/bgCaddy.png);
     color: white;
     border: none;
     margin: 0 5px;
@@ -164,7 +155,7 @@ div.caddyFooter input {
     color: black;
 }
 
-div.caddyFooter input#priceTotal {
+div.caddyFooter input#amountDue {
     font-weight: bold;
 }
 
@@ -174,21 +165,22 @@ div.caddyFooter button {
     height: 7vh;
     font-size: 14pt;
     font-weight: bold;
-    background-image: url('/client/assets/bgCaddy.png');
+    background-image: url(./assets/bgCaddy.png);
     color: white;
     border: none;
 }
 
 div.white {
-    background-color: rgb(255, 255, 255, 0.60);
-    height: 95vh;
+    background-color: rgb(255, 255, 255, 0.80);
+    height: 98vh;
 }
 
 div.coffeeShopProductArea {
-    height: 95vh;
+    height: 98vh;
     width: 70%;
-    float: left;
+    background-image: url('/client/assets/cafetLogos/bgCupAndCake.jpg');
     background-size: cover;
+    float: left;
 }
 
 div#coffeeShopHeader {
@@ -202,56 +194,61 @@ div#coffeeShopHeader h2 {
     margin-left: 30px;
 }
 
-div#coffeeShopHeader button {
+div.coffeeShopBody div#coffeeShopBodyCardContainer {
+    width: 30%;
+    height: 30vh;
     float: left;
+    margin: 10px 20px;
+}
+
+div.coffeeShopBody div.coffeeShopBodyCardBlack {
+    background-color: rgb(0, 0, 0, 0);
+    color: white;
+    opacity: 0;
+    height: 28vh;
+    padding: 10px;
+    font-family: 'Maven Pro', sans-serif;
+    text-align: center;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+}
+
+div.coffeeShopBody div.coffeeShopBodyCardBlack:hover {
+    background-color: rgb(0, 0, 0, 0.75);
+    opacity: 1;
+    color: white;
+    height: 28vh;
+    padding: 10px;
+    font-family: 'Maven Pro', sans-serif;
+    text-align: center;
+}
+
+div.coffeeShopBody div.coffeeShopBodyCardBlack h2 {
+    font-size: 24pt;
+    margin-bottom: -10px;
+    font-family: 'Amatic SC', cursive;
+    ;
+}
+
+div.coffeeShopBody div.coffeeShopBodyCardBlack h5 {
+    margin-top: -5px;
+    font-size: 18pt;
+}
+
+div.coffeeShopBody div.coffeeShopBodyCardBlack button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: -20px;
+    background-color: rgb(0, 0, 0, 0);
+    color: white;
+    border: 2pt solid white;
     font-size: 20pt;
-    background-color: rgb(255, 255, 255, 0);
-    color: black;
-    border: 2pt solid black;
-    margin: 10px;
 }
 
-div.coffeeShopBody {
-    width: 90%;
-    height: 10vh;
-    background-color: red;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: center;
-    justify-content: center;
-}
-
-div.coffeeShop_stock {
-    width: 90%;
-    height: 10vh;
-    background-color: red;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: center;
-    justify-content: start;
-}
-
-.productImage {
-    width: 110px;
-}
-
-.productName {
-    width: 20%;
-    margin-left: 15px;
-}
-
-.productIngredients {
-    width: 50%;
-    font-size: smaller;
-}
-
-.productPrice {
-    width: 10%;
-    text-align: end;
-}
-
-#btnBackToCaddy{
-    width: 100%;
+div.white div.coffeeShopFooter {
+    margin-top: 67vh;
+    text-align: center;
+    font-size: 20pt;
+    font-family: 'Amatic SC', cursive;
 }

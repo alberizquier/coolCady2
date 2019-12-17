@@ -3,14 +3,24 @@ const StockDAO = require('../DAO/StockDAO');
 const StockDTO = require('../DTO/StockDTO');
 const FullStockDTO = require('../DTO/FullStockDTO');
 
+
+
+const ProductDTO = require('../DTO/ProductDTO');
+
+
+
 class StockService extends CrudService {
     constructor(services) {
         super("StockService", StockDAO, StockDTO, FullStockDTO, services);
     }
 
     async fillFieldsFullDTO(fullStockDTO, errors) {
-        fullStockDTO.coffeeShop = await this.loadStockCofeeShop(fullStockDTO.coffeeShopId, errors)
+        fullStockDTO.coffeeShop = await this.loadStockCofeeShop(fullStockDTO.coffeeShopId, errors);
         fullStockDTO.product = await this.loadStockProduct(fullStockDTO.productId, errors);
+        if (!fullStockDTO.product) {
+            fullStockDTO.product = new ProductDTO();
+            fullStockDTO.product.displayName = `Not found, ${fullStockDTO.productId}`;
+        }
         fullStockDTO.fullQuantity = fullStockDTO.quatity;
         return fullStockDTO;
     }

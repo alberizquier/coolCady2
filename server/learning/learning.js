@@ -150,8 +150,6 @@ async function calculateTotals(docHeaderId) {
     return false;
 }
 
-
-
 async function clearCaddy(coffeeShopId) {
     let caddy = new DocHeaderDAO();
     caddy.coffeeShopId = coffeeShopId;
