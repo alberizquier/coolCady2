@@ -17,12 +17,12 @@ export class Main {
             var coffeeShops = await this.clientAPI.getCoffeeShops(serverErrors);
             if (coffeeShops) {
                 //solo he de llamar a cbDisplayCoffeeShops una vez que he recibido correctamente los datos de todas los coffeeshops
-                cbDisplayCoffeeShops(coffeeShops);
+                await cbDisplayCoffeeShops(coffeeShops);
             } else {
-                cbDisplayErrors(serverErrors);
+                await cbDisplayErrors(serverErrors);
             }
         } catch (errorAPI) {
-            cbDisplayErrors(errorAPI);
+            await cbDisplayErrors(errorAPI);
         }
     }
 
@@ -31,12 +31,12 @@ export class Main {
             var serverErrors = [];
             var coffeeShop = await this.clientAPI.getOneCoffeeShop(cofeeShopId, serverErrors);
             if (coffeeShop) {
-                cbDisplayCoffeeShop(coffeeShop);
+                await cbDisplayCoffeeShop(coffeeShop);
             } else {
-                cbDisplayErrors(serverErrors);
+                await cbDisplayErrors(serverErrors);
             }
         } catch (errorAPI) {
-            cbDisplayErrors(errorAPI);
+            await cbDisplayErrors(errorAPI);
         }
     }
 
@@ -46,12 +46,12 @@ export class Main {
             var serverErrors = [];
             var caddy = await this.clientAPI.newCaddy(cofeeShopId, serverErrors);
             if (caddy) {
-                cbDisplayCaddy(caddy);
+                await cbDisplayCaddy(caddy);
             } else {
-                cbDisplayErrors(serverErrors);
+                await cbDisplayErrors(serverErrors);
             }
         } catch (errorAPI) {
-            cbDisplayErrors(errorAPI);
+            await cbDisplayErrors(errorAPI);
         }
 
     }
@@ -61,12 +61,12 @@ export class Main {
             var serverErrors = [];
             var order = await this.clientAPI.closeCaddy(caddyId, serverErrors);
             if (order) {
-                cbDisplayOrder(order);
+                await cbDisplayOrder(order);
             } else {
-                cbDisplayErrors(serverErrors);
+                await cbDisplayErrors(serverErrors);
             }
         } catch (errorAPI) {
-            cbDisplayErrors(errorAPI);
+            await cbDisplayErrors(errorAPI);
         }
     }
 
@@ -75,12 +75,12 @@ export class Main {
             var serverErrors = [];
             var caddy = await this.clientAPI.addProduct(caddyId, productId, quantity, price, serverErrors);
             if (caddy) {
-                cbDisplayCaddy(caddy);
+                await cbDisplayCaddy(caddy);
             } else {
-                cbDisplayErrors(serverErrors);
+                await cbDisplayErrors(serverErrors);
             }
         } catch (errorAPI) {
-            cbDisplayErrors(errorAPI);
+            await cbDisplayErrors(errorAPI);
         }
 
     }
@@ -90,12 +90,12 @@ export class Main {
             var serverErrors = [];
             var caddy = await this.clientAPI.removeProduct(caddyId, productId, quantity, serverErrors);
             if (caddy) {
-                cbDisplayCaddy(caddy);
+                await cbDisplayCaddy(caddy);
             } else {
-                cbDisplayErrors(serverErrors);
+                await cbDisplayErrors(serverErrors);
             }
         } catch (errorAPI) {
-            cbDisplayErrors(errorAPI);
+            await cbDisplayErrors(errorAPI);
         }
 
     }
@@ -105,12 +105,12 @@ export class Main {
             var serverErrors = [];
             var caddy = await this.clientAPI.removeSelection(docDetailid, serverErrors);
             if (caddy) {
-                cbDisplayCaddy(caddy);
+                await cbDisplayCaddy(caddy);
             } else {
-                cbDisplayErrors(serverErrors);
+                await cbDisplayErrors(serverErrors);
             }
         } catch (errorAPI) {
-            cbDisplayErrors(errorAPI);
+            await cbDisplayErrors(errorAPI);
         }
 
     }

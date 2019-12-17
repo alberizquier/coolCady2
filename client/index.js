@@ -6,10 +6,9 @@ import {
     MainMock
 } from './tests/main.mock.js';
 
-
 var currentCaddy = null;
 
-class Index {
+export default class Index {
     constructor(main) {
         if (!main) {
             main = new Main();
@@ -27,7 +26,6 @@ class Index {
     //#endregion
 
     //#region AuxFuntions
-
     hideNode(nameNode, hidden) {
         let node = document.getElementById(nameNode);
         if (hidden) {
@@ -36,7 +34,6 @@ class Index {
             node.style.display = "block";
         }
     }
-
     //#endregion
 
     //#region DisplayModels
@@ -68,11 +65,7 @@ class Index {
             divBlackNode.appendChild(brNode);
             divBlackNode.appendChild(spanNode);
 
-
-
-            console.log(`coffeeShop.logoURL: ${coffeeShop.logoURL}`);
             divCardNode.setAttribute('class', 'card');
-            //divCardNode.setAttribute('style',`background-image: url("/client/assets/cafetLogos/${coffeeShop.backgroundPictureURL}")`);
             divCardNode.style.backgroundImage = `url("/client/assets/cafetLogos/${coffeeShop.backgroundPictureURL}")`;
             divCardNode.style.backgroundPosition = "center";
             divCardNode.style.backgroundSize = "cover";
@@ -84,8 +77,6 @@ class Index {
             divCardNode.addEventListener('click', () => {
                 this.btnCoffeeShopClick(coffeeShop.id);
             })
-
-
         }
     }
 
@@ -115,17 +106,14 @@ class Index {
         this.hideNode('coffeeShopCardsArea', true);
         this.hideNode('coffeeShopProductArea', false);
 
-        //Nodos HTML para display de campos
         let coffeeShop_nameNode = document.getElementById('coffeeShop_name');
         let coffeeShopBodyNode = document.getElementById('coffeeShopBody');
-        //Relleno de nodos con los datos del json
         coffeeShop_nameNode.textContent = coffeeShop.displayName;
-        //limpiamos el contenido del products body
+
         coffeeShopBodyNode.innerHTML = "";
         for (let stock of coffeeShop.stocks) {
             let coffeeShop_stockNode = document.createElement('div');
             let coffeeShop_stock_black = document.createElement('div');
-            // let coffeeShop_stock_pictureNode = document.createElement('img');
             let coffeeShop_stock_product_displayNameNode = document.createElement('h2');
             let coffeeShop_stock_product_ingredientsNode = document.createElement('h4');
             let coffeeShop_stock_priceSellNode = document.createElement('h5');
@@ -133,7 +121,6 @@ class Index {
 
             coffeeShopBodyNode.appendChild(coffeeShop_stockNode);
             coffeeShop_stockNode.appendChild(coffeeShop_stock_black);
-            // coffeeShop_stockNode.appendChild(coffeeShop_stock_pictureNode);
             coffeeShop_stock_black.appendChild(coffeeShop_stock_product_displayNameNode);
             coffeeShop_stock_black.appendChild(coffeeShop_stock_product_ingredientsNode);
             coffeeShop_stock_black.appendChild(coffeeShop_stock_priceSellNode);
@@ -144,10 +131,6 @@ class Index {
             coffeeShop_stockNode.setAttribute('style', `background-image: url("/client/assets/dishes${stock.product.pictureURL}")`)
             coffeeShop_stock_black.setAttribute('class', 'coffeeShopBodyCardBlack');
             coffeeShop_stock_black.setAttribute('id', 'coffeeShopBodyCardBlack');
-            // coffeeShop_stock_black.setAttribute('style',`url("/client/assets/dishes${stock.product.pictureURL}")`);
-            // coffeeShop_stockNode.setAttribute('class', 'container coffeeShop_stock');
-            // coffeeShop_stock_pictureNode.setAttribute('src', `/client/assets/dishes${stock.product.pictureURL}`);
-            // coffeeShop_stock_pictureNode.setAttribute('class', 'productImage');
             coffeeShop_stock_product_displayNameNode.setAttribute('class', 'productName');
             coffeeShop_stock_product_ingredientsNode.setAttribute('class', 'productIngredients');
             coffeeShop_stock_priceSellNode.setAttribute('class', 'productPrice');
@@ -193,6 +176,26 @@ class Index {
             case 8:
             case 9:
             case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+            case 16:
+            case 17:
+            case 18:
+            case 19:
+            case 20:
+            case 21:
+            case 22:
+            case 23:
+            case 24:
+            case 25:
+            case 26:
+            case 27:
+            case 28:
+            case 29:
+            case 30:
                 totalItemsId = caddy.totalItems.toString();
                 break;
             default:
@@ -288,7 +291,7 @@ class Index {
         taxBaseRNode.value = `${caddy.taxBaseR.toFixed(2)} €`;
         amountDueNode.value = `${caddy.amountDue.toFixed(2)} €`;
 
-        //el amount del vat no viene calculado! Se ha de calcular dinamicamente
+        //el amount del vat ha de venir dado por el server
         let vatBaseR = caddy.taxBaseR * caddy.percentageBaseR;
         vatBaseRNode.value = `${vatBaseR.toFixed(2)} €`;
     }
@@ -323,6 +326,7 @@ class Index {
         this.displayCaddyHeader(caddy);
 
         let caddyBodyNode = document.getElementById('caddyBody');
+        caddyBodyNode.setAttribute('class', 'caddyBody');
         caddyBodyNode.innerHTML = '<h2>Your dishes list</h2>';
         for (let docDetail of caddy.docDetails) {
             this.displayCaddyDetails(caddyBodyNode, docDetail);
@@ -425,8 +429,11 @@ class Index {
     };
 
 }
+
 var mainMock = new MainMock();
 //To use app without db
 //var index = new Index(mainMock);
 //To use with db
-var index = new Index(); 
+var index = new Index();
+
+ 

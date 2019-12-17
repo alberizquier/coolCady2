@@ -1226,7 +1226,7 @@ class CaddyMock {
 
 
 //#endregion
-export class MainMock {
+class MainMock {
     constructor() {
         this.currentCaddy = null;
     }
@@ -1415,3 +1415,5 @@ export class MainMock {
         cbDisplayErrors(errors);
     }
 }
+
+export {MainMock};

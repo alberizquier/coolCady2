@@ -270,7 +270,6 @@ class CrudAPI extends BaseAPI {
         };
     }
     //#endregion
-
 }
 
 module.exports = CrudAPI;

@@ -1,7 +1,5 @@
 const CrudAPI = require('./CrudAPI');
-
 const DocDetailDTO = require('../DTO/DocDetailDTO');
-
 
 class DocHeadersAPI extends CrudAPI {
     constructor(uri, app, services) {

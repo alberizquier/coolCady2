@@ -60,7 +60,6 @@ class CoffeeShopService extends CrudService {
 
     async canDeleteOne(coffeeShopId, errors) {
         var hasStocks = false;
-        //Find Stocks
         var stocks = await this.DAO.CoffeeShopDAO.find({ coffeeShopId: coffeeShopId }).limit(1);
         if (stocks) {
             hasStocks = stocks.length > 0;
@@ -68,13 +67,8 @@ class CoffeeShopService extends CrudService {
                 errors.push(`${this.nameService}.canDelete(): the coffeeShop has Stocks associated`);
             }
         }
-        //other relations
-
-        //end verificaton
         return !hasStocks;
     }
-
-
 
     async canUpdateOne(coffeeShopDTO, errors) {
         if (await super.canUpdateOne(coffeeShopDTO, errors)) {

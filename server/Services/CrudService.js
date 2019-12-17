@@ -34,27 +34,21 @@ class CrudService extends BaseService {
     }
 
     async readAll(filter, errors) {
-        //creo un array vacio para insertar todos los registros a la lista
         let allRecordsDTO = [];
-        //con el filtro que te he pasado encuentra todos los registros que cumplan el filtro
         let allRecordsDAO = await this.classDAO.find(filter);
         if (allRecordsDAO) {
-            //recorro esa lista
             for (let recordDAO of allRecordsDAO) {
-                //para cada registro de esa lista instancio un nuevo objeto de de la clase ClassDTO
                 let recordDTO = new this.classDTO();
-                //a mi lista inserto cada el lemento que cumpla el filtro, habiendo previamente tranformado de DAO a DTO.
                 allRecordsDTO.push(recordDTO.fromDAO(recordDAO));
             }
         }
-        //devuelvo la lista de todos los resgistro que cumplen el filtro. 
         return allRecordsDTO;
     }
 
-    
+
 
     async readOne(id, errors) {
-        //Busco un registro DAO y si se encuentra lo traspaso a un nuevo registro DTO y lo devuelvo.
+        //Busco un registro DAO por su id y si se encuentra lo traspaso a un nuevo registro DTO y lo devuelvo.
         let recordDAO = await this.classDAO.findById(id);
         if (recordDAO) {
             let recordDTO = this.model();
@@ -66,11 +60,10 @@ class CrudService extends BaseService {
     }
 
     //Virtual method
-    async fillFieldsFullDTO(recordFullDTO,errors) {
+    async fillFieldsFullDTO(recordFullDTO, errors) {
         //TO Be override by the derived service 
         return recordFullDTO;
     }
-
 
     async readFullOne(id, errors) {
         let recordDAO = await this.classDAO.findById(id);
@@ -133,19 +126,8 @@ class CrudService extends BaseService {
 
     //Virtual method
     async canDeleteOne(id, errors) {
+        //TO Be override by the derived service 
         var ok = true;
-        //Find related tables
-        /*To Be implemented by derived class
-        var hasBudgetDetails = false;
-         var budgetDetails = await BudgetDetailDAO.find({ experienceId: experienceId }).limit(1);
-         if (budgetDetails) {
-             hasBudgetDetails = true;
-             errors.push(`ExperienceService.canDelete(): the budget can't be deleted because it has details associated to it`);
-         }
-         */
-        //other relations
-
-        //end verificaton
         return ok;
     }
 

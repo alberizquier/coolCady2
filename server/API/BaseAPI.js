@@ -98,7 +98,6 @@ class BaseAPI {
         this.sendData(res, new this.fullModelClass());
     }
 
-
     async seed(req, res) {
         console.log(`${this.nameAPI}API: seed(): `);
         let errors = [];

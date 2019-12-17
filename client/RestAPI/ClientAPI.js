@@ -1,4 +1,3 @@
-
 export class ClientAPI {
     constructor(hostName, portNumber, apiPath) {
         this.hostName = hostName;
@@ -35,10 +34,10 @@ export class ClientAPI {
     async newCaddy(coffeeShopId, errors) {
         try {
             var fetchParams = {
-                method: 'POST', 
-                body: null, 
-                headers:{
-                  'Content-Type': 'application/json'
+                method: 'POST',
+                body: null,
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             };
             var response = await fetch(`${this.uri}/caddy/${coffeeShopId}`, fetchParams);
@@ -50,13 +49,13 @@ export class ClientAPI {
         return null;
     }
 
-    async closeCaddy(caddyId, errors){
+    async closeCaddy(caddyId, errors) {
         try {
             var fetchParams = {
-                method: 'POST', 
-                body: null, 
-                headers:{
-                  'Content-Type': 'application/json'
+                method: 'POST',
+                body: null,
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             };
             var response = await fetch(`${this.uri}/caddy/${caddyId}/close`, fetchParams);
@@ -81,10 +80,10 @@ export class ClientAPI {
                 remarks: ""
             };
             var fetchParams = {
-                method: 'POST', 
-                body: JSON.stringify(data), 
-                headers:{
-                  'Content-Type': 'application/json'
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             };
             var response = await fetch(`${this.uri}/caddy/product/${caddyId}`, fetchParams);
@@ -96,7 +95,7 @@ export class ClientAPI {
         return null;
     }
 
-    async removeProduct(caddyId, productId,quantity,errors) {
+    async removeProduct(caddyId, productId, quantity, errors) {
         try {
             //object to be included in the body request before json.stringify();
             var data = {
@@ -110,14 +109,13 @@ export class ClientAPI {
                 remarks: ""
             };
             var fetchParams = {
-                method: 'DELETE', 
-                body: JSON.stringify(data), 
-                headers:{
-                  'Content-Type': 'application/json'
+                method: 'DELETE',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             };
-            //call to fetch(Endpoint, fetchParams);
-            var response = await fetch(`${this.uri}/caddy/product/${caddyId}`,fetchParams);
+            var response = await fetch(`${this.uri}/caddy/product/${caddyId}`, fetchParams);
             var dataJson = await response.json();
             return dataJson;
         } catch (error) {
@@ -126,19 +124,18 @@ export class ClientAPI {
         return null;
     }
 
-    async removeSelection (docDetailid, errors){
+    async removeSelection(docDetailid, errors) {
         try {
             //object to be included in the body request before json.stringify();
-            
+
             var fetchParams = {
-                method: 'DELETE', 
-                body: null, 
-                headers:{
-                  'Content-Type': 'application/json'
+                method: 'DELETE',
+                body: null,
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             };
-            //call to fetch(Endpoint, fetchParams);
-            var response = await fetch(`${this.uri}/caddy/selection/${docDetailid}`,fetchParams);
+            var response = await fetch(`${this.uri}/caddy/selection/${docDetailid}`, fetchParams);
             var dataJson = await response.json();
             return dataJson;
         } catch (error) {

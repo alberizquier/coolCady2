@@ -80,7 +80,6 @@ class DocHeaderService extends CrudService {
     }
 
     async calculateTotals(docHeaderId, errors) {
-        //localizamos el headerDTO
         let docHeaderDTO = await this.readOne(docHeaderId, errors);
         if (docHeaderDTO) {
             //localizamos los detailsDTO(docHeaderDTO.id) asociados
@@ -129,7 +128,6 @@ class DocHeaderService extends CrudService {
     }
 
     async addProduct(docHeaderId, docDetailDTO, errors) {
-        //Busco el docHeader(caddy) ya existente
         let docHeaderDTO = await this.readOne(docHeaderId, errors);
         if (docHeaderDTO) {
             //añado el detail que me viene al caddy
@@ -138,12 +136,12 @@ class DocHeaderService extends CrudService {
             if ("RSN".indexOf(DocDetailDTO.vatKind) < 0) {
                 DocDetailDTO.vatKind = "R";
             }
-            //busco el docDetail con el filtro carrito-producto 
+            //busco el docDetail con el filtro caddy-producto 
             var docDetailsDTO = await this.services.docDetailsService.readAll({
                 docHeaderId: docHeaderId,
                 productId: docDetailDTO.productId
             }, errors);
-            //Si no ha habido fallos buscando detalles (carrito-producto) 
+            //Si no ha habido fallos buscando detalles (caddy-producto) 
             if (docDetailsDTO) {
                 //comprobar si el array de docDetails es de 0
                 if (docDetailsDTO.length == 0) {
@@ -202,6 +200,7 @@ class DocHeaderService extends CrudService {
                     }
                 }
             }
+            //Actualizo los totales del caddy  
             let result = await this.calculateTotals(docHeaderId, errors);
             if (!result) {
                 return null;
@@ -223,6 +222,7 @@ class DocHeaderService extends CrudService {
             if (!deleted) {
                 return null;
             }
+            //Actualizo los totales del caddy  
             let result = await this.calculateTotals(docDetailDTO.docHeaderId, errors);
             if (!result) {
                 return null;
