@@ -10,6 +10,7 @@ const DocHeadersAPI = require('./API/DocHeadersAPI');
 const ProductsAPI = require('./API/ProductsAPI');
 const StocksAPI = require('./API/StocksAPI');
 const VATsAPI = require('./API/VATsAPI');
+const CaddyAPI = require('./API/CaddyAPI');
 
 var Seed = require('../server/Services/Seed');
 var data = require('../server/data/data');
@@ -97,6 +98,10 @@ services.DTO.VATDTO = VATDTO;
 services.DTO.FullVATDTO = FullVATDTO;
 //#endregion
 
+//#region Caddy
+const CaddyService = require('./Services/CaddyService');
+//#endregion
+
 //#region Services
 services.services.coffeeShopsService = new CoffeeShopsService(services);
 services.services.docDetailsService = new DocDetailsService(services);
@@ -107,6 +112,7 @@ services.services.stocksService = new StocksService(services);
 services.services.productsService = new ProductsService(services);
 services.services.usersService = new UsersService(services);
 services.services.vatsService = new VATsService(services);
+services.services.caddyService = new CaddyService(services);
 //#endregion
 
 app.use(bodyParser.urlencoded({
@@ -119,9 +125,11 @@ app.use(cors());
 const vatsAPI = new VATsAPI('/api', app, services.services);
 const productsAPI = new ProductsAPI('/api', app, services.services);
 const coffeeShopsAPI = new CoffeeShopsAPI('/api',app,services.services);
-const stocksAPI = new StocksAPI('/api',app,services.services)
-const docHeadersAPI = new DocHeadersAPI('/api',app,services.services)
-const docDetailsAPI = new DocDetailsAPI('/api',app,services.services)
+const stocksAPI = new StocksAPI('/api',app,services.services);
+const docHeadersAPI = new DocHeadersAPI('/api',app,services.services);
+const docDetailsAPI = new DocDetailsAPI('/api',app,services.services);
+const caddyAPI = new CaddyAPI('/api',app,'caddy',services.services.caddyService);
+
 //#endregion
 
 async function appInit() {

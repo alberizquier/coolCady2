@@ -1,14 +1,10 @@
-import {
-    ClientAPI
-} from './RestAPI/ClientAPI.js';
-
 //Este modulo asocia la clientAPI con las funcciones de callBack que suministrará index.js
 //FORBIDDEN poner document.getElementByID de nada AQUI!!!
 //En el callback mandamos  los datos recibidos como parametro y el codigo de index.js los ha de asociar. 
 
 export class Main {
-    constructor() {
-        this.clientAPI = new ClientAPI('localhost', '3000', 'api');
+    constructor(clientAPI) {
+        this.clientAPI = clientAPI;
     }
 
     async refreshCoffeeShops(cbDisplayCoffeeShops, cbDisplayErrors) {
@@ -26,10 +22,10 @@ export class Main {
         }
     }
 
-    async refreshCoffeeShop(cofeeShopId, cbDisplayCoffeeShop, cbDisplayErrors) {
+    async refreshCoffeeShop(coffeeShopId, cbDisplayCoffeeShop, cbDisplayErrors) {
         try {
             var serverErrors = [];
-            var coffeeShop = await this.clientAPI.getOneCoffeeShop(cofeeShopId, serverErrors);
+            var coffeeShop = await this.clientAPI.getOneCoffeeShop(coffeeShopId, serverErrors);
             if (coffeeShop) {
                 await cbDisplayCoffeeShop(coffeeShop);
             } else {
@@ -40,11 +36,10 @@ export class Main {
         }
     }
 
-
-    async newCaddy(cofeeShopId, cbDisplayCaddy, cbDisplayErrors) {
+    async newCaddy(coffeeShopId, cbDisplayCaddy, cbDisplayErrors) {
         try {
             var serverErrors = [];
-            var caddy = await this.clientAPI.newCaddy(cofeeShopId, serverErrors);
+            var caddy = await this.clientAPI.newCaddy(coffeeShopId, serverErrors);
             if (caddy) {
                 await cbDisplayCaddy(caddy);
             } else {

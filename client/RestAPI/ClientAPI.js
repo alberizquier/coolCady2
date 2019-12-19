@@ -11,7 +11,7 @@ export class ClientAPI {
 
     async getCoffeeShops(errors) {
         try {
-            var response = await fetch(`${this.uri}/coffeeshops`);
+            var response = await fetch(`${this.uri}/shops`);
             var dataJson = await response.json();
             return dataJson;
         } catch (error) {
@@ -22,7 +22,7 @@ export class ClientAPI {
 
     async getOneCoffeeShop(coffeeShopId, errors) {
         try {
-            var response = await fetch(`${this.uri}/coffeeshops/${coffeeShopId}/full`);
+            var response = await fetch(`${this.uri}/shops/${coffeeShopId}`);
             var dataJson = await response.json();
             return dataJson;
         } catch (error) {

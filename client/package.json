@@ -7,12 +7,14 @@
     "test": "tests"
   },
   "dependencies": {
-    "jest": "^24.9.0"
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^24.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "babel-jest": "^24.9.0",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "babel-jest": "^23.6.0",
     "jest": "^24.9.0"
   },
   "scripts": {

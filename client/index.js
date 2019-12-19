@@ -5,13 +5,17 @@ import {
 import {
     MainMock
 } from './tests/main.mock.js';
+import { ClientAPIMock } from './tests/ClientAPI.mock.js';
+import { ClientAPI } from './RestAPI/ClientAPI.js';
+
+
 
 var currentCaddy = null;
 
 export default class Index {
     constructor(main) {
         if (!main) {
-            main = new Main();
+            main = new Main(new ClientAPI('localhost', '3000', 'api'));
         }
         this.main = main;
         this.initApp();
@@ -46,7 +50,7 @@ export default class Index {
                  </div>
              </div>
          */
-
+        debugger;
         this.hideNode('coffeeShopCardsArea', false);
         this.hideNode('coffeeShopProductArea', true);
 
@@ -351,6 +355,7 @@ export default class Index {
     }
 
     async getCoffeeShop(coffeeShopId) {
+        debugger;
         await this.main.refreshCoffeeShop(coffeeShopId, this.displayCoffeeShop.bind(this), this.displayErrors.bind(this));
     }
 
@@ -371,6 +376,7 @@ export default class Index {
     }
 
     async addToCaddy(productId, quantity, price) {
+        debugger;
         await this.main.addProduct(currentCaddy.id, productId, quantity, price, this.displayCaddy.bind(this), this.displayErrors.bind(this));
     }
 
@@ -430,10 +436,9 @@ export default class Index {
 
 }
 
-var mainMock = new MainMock();
 //To use app without db
-//var index = new Index(mainMock);
+var index = new Index(new Main(new ClientAPIMock('localhost', '3000', 'api')));
 //To use with db
-var index = new Index();
+// var index = new Index(new Main(new ClientAPI('localhost', '3000', 'api')));
 
  
