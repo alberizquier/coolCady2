@@ -389,7 +389,6 @@ export default class Index {
     }
     //#endregion
 
-
     //#region ClickEvents
     btnRefreshAreasClick() {
         this.getCoffeeShops();
@@ -406,7 +405,6 @@ export default class Index {
     }
 
     //#endregion
-
 
     //#region InitApp
     initApp() {
@@ -435,6 +433,7 @@ export default class Index {
     };
 
 }
+//#endregion
 
 //To use app without db
 //var index = new Index(new Main(new ClientAPIMock('localhost', '3000', 'api')));

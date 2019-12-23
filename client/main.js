@@ -1,4 +1,4 @@
-//Este modulo asocia la clientAPI con las funcciones de callBack que suministrará index.js
+//Este modulo asocia la clientAPI con las funcciones de callBack que suministra index.js
 //FORBIDDEN poner document.getElementByID de nada AQUI!!!
 //En el callback mandamos  los datos recibidos como parametro y el codigo de index.js los ha de asociar. 
 
