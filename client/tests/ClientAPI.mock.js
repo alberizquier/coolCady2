@@ -209,14 +209,14 @@ export class ClientAPIMock {
         return null;
     }
 
-    async removeSelection(docDetailid, errors) {
+    async removeSelection(docDetailId, errors) {
         try {
             if (!this.currentCaddy) {
                 errors.push('removeSelection()FAILS: ,Caddy not created already, call newCaddy() first');
             } else {
                 let index = 0;
                 for (let docDetail of this.currentCaddy.docDetails) {
-                    if (docDetail.id == docDetailid) {
+                    if (docDetail.id == docDetailId) {
                         this.currentCaddy.docDetails.splice(index, 1);
 
                         this.calculateTotals();
@@ -226,7 +226,7 @@ export class ClientAPIMock {
                     }
                     index++;
                 }
-                errors.push('removeSelection()FAILS: ,docDetailid not found!');
+                errors.push('removeSelection()FAILS: ,docDetailId not found!');
             }
         } catch (error) {
             errors.push(error.message);

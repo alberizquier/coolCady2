@@ -140,10 +140,10 @@ class CaddyAPI extends BaseAPI {
 
     async removeSelection(req,res){
         console.log(`API caddy removeSelection()`);
-        const docDetailid = req.params.docDetailId;
+        const docDetailId = req.params.docDetailId;
         try {
             var errors = [];
-            const caddyDTO = await this.caddyService.removeSelection(docDetailid, errors);
+            const caddyDTO = await this.caddyService.removeSelection(docDetailId, errors);
             if (caddyDTO) {
                 this.sendData(res, caddyDTO)
             } else {

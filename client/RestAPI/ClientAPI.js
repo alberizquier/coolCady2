@@ -124,7 +124,7 @@ export class ClientAPI {
         return null;
     }
 
-    async removeSelection(docDetailid, errors) {
+    async removeSelection(docDetailId, errors) {
         try {
             //object to be included in the body request before json.stringify();
 
@@ -135,7 +135,7 @@ export class ClientAPI {
                     'Content-Type': 'application/json'
                 }
             };
-            var response = await fetch(`${this.uri}/caddy/selection/${docDetailid}`, fetchParams);
+            var response = await fetch(`${this.uri}/caddy/selection/${docDetailId}`, fetchParams);
             var dataJson = await response.json();
             return dataJson;
         } catch (error) {

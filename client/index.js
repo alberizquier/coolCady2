@@ -384,8 +384,8 @@ export default class Index {
         await this.main.removeProduct(currentCaddy.id, productId, quantity, this.displayCaddy.bind(this), this.displayErrors.bind(this));
     }
 
-    async removeSelectionFromCaddy(docDetailid) {
-        await this.main.removeSelection(docDetailid, this.displayCaddy.bind(this), this.displayErrors.bind(this));
+    async removeSelectionFromCaddy(docDetailId) {
+        await this.main.removeSelection(docDetailId, this.displayCaddy.bind(this), this.displayErrors.bind(this));
     }
     //#endregion
 

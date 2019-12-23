@@ -253,9 +253,9 @@ async function removeFromCaddy(caddyId, productId, quantity) {
     return null;
 }
 
-async function removeSelectionFromCaddy(caddyId, docDetailid) {
+async function removeSelectionFromCaddy(caddyId, docDetailId) {
     try {
-        let docDetailDAO = await DocDetailDAO.findById(docDetailid);
+        let docDetailDAO = await DocDetailDAO.findById(docDetailId);
         if (docDetailDAO) {
             await DocDetailDAO.deleteOne({
                 _id: docDetailDAO._id

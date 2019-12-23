@@ -178,14 +178,14 @@ class MainMock {
         cbDisplayErrors(errors);
     }
 
-    async removeSelection(docDetailid, cbDisplayCaddy, cbDisplayErrors) {
+    async removeSelection(docDetailId, cbDisplayCaddy, cbDisplayErrors) {
         var errors = [];
         if (!this.currentCaddy) {
             errors.push('Caddy not created already, call newCaddy() first');
         } else {
             let index = 0;
             for (let docDetail of this.currentCaddy.docDetails) {
-                if (docDetail.id == docDetailid) {
+                if (docDetail.id == docDetailId) {
                     this.currentCaddy.docDetails.splice(index, 1);
 
                     this.calculateTotals();
@@ -194,7 +194,7 @@ class MainMock {
                 }
                 index++;
             }
-            errors.push('docDetailid not found!');
+            errors.push('docDetailId not found!');
         }
         cbDisplayErrors(errors);
     }

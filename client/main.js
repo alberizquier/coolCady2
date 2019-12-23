@@ -95,10 +95,10 @@ export class Main {
 
     }
 
-    async removeSelection(docDetailid, cbDisplayCaddy, cbDisplayErrors) {
+    async removeSelection(docDetailId, cbDisplayCaddy, cbDisplayErrors) {
         try {
             var serverErrors = [];
-            var caddy = await this.clientAPI.removeSelection(docDetailid, serverErrors);
+            var caddy = await this.clientAPI.removeSelection(docDetailId, serverErrors);
             if (caddy) {
                 await cbDisplayCaddy(caddy);
             } else {
