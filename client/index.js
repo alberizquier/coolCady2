@@ -437,8 +437,8 @@ export default class Index {
 }
 
 //To use app without db
-var index = new Index(new Main(new ClientAPIMock('localhost', '3000', 'api')));
-//To use with db
-// var index = new Index(new Main(new ClientAPI('localhost', '3000', 'api')));
+//var index = new Index(new Main(new ClientAPIMock('localhost', '3000', 'api')));
+//To use app with db
+ var index = new Index(new Main(new ClientAPI('localhost', '3000', 'api')));
 
  
